@@ -6,19 +6,17 @@
 
                 <!-- Poster Image -->
                 <div *ngIf="movie.poster_path; then truePoster else falsePoster"></div>
-            
+
                 <ng-template #truePoster>
                     <img mat-card-image src="{{url_image}}{{movie.poster_path}}">
                 </ng-template>
-            
+
                 <ng-template #falsePoster>
                     <img mat-card-image  src="assets/no-poster.jpg">
                 </ng-template>
-            
+
                 </mat-card>
     <mat-grid-tile-footer>{{movie.title}}</mat-grid-tile-footer>
     </mat-grid-tile>
-    
-</mat-grid-list>
 
-</div>
+</mat-grid-list>

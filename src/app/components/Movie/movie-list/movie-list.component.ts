@@ -9,20 +9,20 @@ import { MovieService } from '../../../services/movie.service';
 export class MovieListComponent implements OnInit {
 
   public movies;
-  public page:number = 1;
-  url_image: string = 'https://image.tmdb.org/t/p/w500';
+  public page = 1;
+  public url_image = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
     this.movieService.getPopularMovies(this.page).subscribe(
-      (data: any ) =>{
+      (data: any ) => {
         this.movies = data;
       },
       (error: any) => {
-        console.log(error)
+        console.log(error);
       }
-    )
+    );
   }
 
 }

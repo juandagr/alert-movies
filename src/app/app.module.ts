@@ -33,7 +33,7 @@ import { MovieListComponent } from './components/Movie/movie-list/movie-list.com
     MatIconModule,
     MatSidenavModule,
     AppRoutingModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
