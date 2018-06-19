@@ -52,5 +52,28 @@ export class MovieService {
           }
         ));
   }
+
+  getMovieDetails(id: number): Observable<any> {
+    const args = '&language=en-US';
+    const url = (this.apiUrl + '/movie/' + id + '?api_key=' + this.apiKey + args );
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            return data.results.map((item) => {
+              return {
+                id: item.id,
+                title: item.title,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
+                genres: item.genres
+
+              };
+            });
+          }
+        ));
+  }
 }
 

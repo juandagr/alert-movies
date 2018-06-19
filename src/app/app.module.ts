@@ -14,12 +14,14 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieListComponent } from './components/Movie/movie-list/movie-list.component';
+import { MovieDetailsComponent } from './components/Movie/movie-details/movie-details.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieListComponent
+    MovieListComponent,
+    MovieDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,6 @@ import { MovieListComponent } from './components/Movie/movie-list/movie-list.com
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent]
+  exports: [MovieListComponent, MovieDetailsComponent]
 })
 export class AppModule { }
