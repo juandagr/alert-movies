@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../../services/movie.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie-details',
@@ -8,21 +9,35 @@ import { MovieService } from '../../../services/movie.service';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  public movie;
+  public movie = {
+    id: 0,
+    title: "",
+    vote_average: 0,
+    poster_path : "",
+    overview: "",
+    genres: []
+
+  };
   public url_image = 'https://image.tmdb.org/t/p/w500';
 
-  constructor(private movieService:  MovieService) { }
+  constructor(
+    private movieService:  MovieService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.movieService.getMovieDetails(33).subscribe(
-      (data: any ) => {
-        this.movie = data;
-        console.log(data);
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+    this.route.params.subscribe(params =>{
+      let idMovie:number = +params['id'];
+      this.movieService.getMovieDetails(idMovie).subscribe(
+        (data: any ) => {
+          this.movie = data;
+          console.log(data);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    })
+    
   }
 
 }

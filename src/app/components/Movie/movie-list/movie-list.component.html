@@ -1,8 +1,9 @@
-<h1>Movies</h1>
+<section>
+    <h1>Movies</h1>
 
-<mat-grid-list  cols="4" gutterSize="5px" rowHeight="470px">
-    <mat-grid-tile *ngFor="let movie of movies" [colspan]="1" [rowspan]="1">
-        <mat-card class="movie">
+    <mat-grid-list  cols="4" gutterSize="5px" rowHeight="470px">
+        <mat-grid-tile *ngFor="let movie of movies" [colspan]="1" [rowspan]="1">
+            <mat-card class="movie" [routerLink]="['/movie', movie.id]">
 
                 <!-- Poster Image -->
                 <div *ngIf="movie.poster_path; then truePoster else falsePoster"></div>
@@ -15,8 +16,28 @@
                     <img mat-card-image  src="assets/no-poster.jpg">
                 </ng-template>
 
-                </mat-card>
-    <mat-grid-tile-footer>{{movie.title}}</mat-grid-tile-footer>
-    </mat-grid-tile>
+            </mat-card>
+        <mat-grid-tile-footer>{{movie.title}}</mat-grid-tile-footer>
+        </mat-grid-tile>
 
-</mat-grid-list>
+    </mat-grid-list>
+
+    <td-paging-bar #pagingBar
+                    [pageLinkCount]="5"
+                    [pageSize]="100"
+                    [total]="1345"
+                    (change)="changePage($event)">
+    {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+    <div *ngIf="movies.length > 0" layout-xs="column" layout-gt-xs="row" layout-align-xs="center center"
+        layout-align-sm="center center" layout-align-gt-sm="end center" class="push-top-sm">
+        <div>
+        <span>Currently on page: {{currentPage}} of {{totalPages}}</span>
+        <span> ({{totalResults}} results)</span>
+        </div>
+        <td-paging-bar [pageSize]="[20]"
+                        [pageLinkCount]="0" [initialPage]="currentPage" [firstLast]="firstLast"
+                        [total]="totalResults" (change)="changePage($event)" class="tc-grey-900">
+        </td-paging-bar>
+        </div>
+</section>
