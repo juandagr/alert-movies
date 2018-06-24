@@ -54,8 +54,9 @@ export class MovieService {
   }
 
   getMovieDetails(id: number): Observable<any> {
-    const args = '&language=en-US';
-    const url = (this.apiUrl + '/movie/' + id + '?api_key=' + this.apiKey + args );
+    const append = '&append_to_response=credits,images,similar,videos';
+    const url = (this.apiUrl + '/movie/' + id + '?api_key=' + this.apiKey  + append);
+    console.log(url);
     return this.http
       .get(url)
       .pipe(
@@ -67,8 +68,17 @@ export class MovieService {
               vote_average: data.vote_average,
               poster_path : data.poster_path,
               overview: data.overview,
-              genres: data.genres
-
+              genres: data.genres,
+              similar: data.similar,
+              credits: data.credits,
+              videos: data.videos,
+              images: data.images,
+              backdrop_path: data.backdrop_path,
+              runtime: data.runtime,
+              release_date: data.release_date,
+              revenue: data.revenue,
+              budget: data.budget,
+              homepage: data.homepage
             };
           }
         ));

@@ -14,6 +14,7 @@ export class MovieListComponent implements OnInit {
   page = 1;
   url_image = 'https://image.tmdb.org/t/p/w500';
 
+
   // Used for pagination
   currentPage = 1;
   firstLast = true;
@@ -32,7 +33,7 @@ export class MovieListComponent implements OnInit {
     this.currentPage = event.page;
     this.router.navigate(['/list-movies/popular', {'page': this.currentPage}]);
     this.getMoviesActualPage();
-    
+
   }
 
   getMoviesActualPage(){

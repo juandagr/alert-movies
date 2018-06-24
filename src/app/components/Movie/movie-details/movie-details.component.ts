@@ -9,16 +9,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  public movie = {
-    id: 0,
-    title: "",
-    vote_average: 0,
-    poster_path : "",
-    overview: "",
-    genres: []
+  // Attributes
+  movie;
+  id: number;
+  videoURL: string;
+  tabIndex = 0;
+  position = 'right';
+  url_image_poster = 'https://image.tmdb.org/t/p/w500';
+  url_images_backdrops = 'https://image.tmdb.org/t/p/original';
+  url_image_profile = 'https://image.tmdb.org/t/p/w500';
+  apiImgBack = 'https://image.tmdb.org/t/p/' + 'w1400_and_h450_bestv2';
+  image: string;
 
-  };
-  public url_image = 'https://image.tmdb.org/t/p/w500';
 
   constructor(
     private movieService:  MovieService,
@@ -26,18 +28,22 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params =>{
-      let idMovie:number = +params['id'];
+      const idMovie: number = +params['id'];
       this.movieService.getMovieDetails(idMovie).subscribe(
         (data: any ) => {
           this.movie = data;
           console.log(data);
+
+          if (this.movie.backdrop_path) {
+            this.image = this.apiImgBack + this.movie.backdrop_path;
+            console.log(this.image);
+          }
         },
         (error: any) => {
           console.log(error);
         }
       );
-    })
-    
+    });
   }
 
 }
