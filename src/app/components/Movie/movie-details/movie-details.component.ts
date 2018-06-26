@@ -21,12 +21,18 @@ export class MovieDetailsComponent implements OnInit {
   apiImgBack = 'https://image.tmdb.org/t/p/' + 'w1400_and_h450_bestv2';
   image: string;
 
+  // used for responsive
+  breakpointBackdrops;
+  breakpointPosters;
+
 
   constructor(
     private movieService:  MovieService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.breakpointBackdrops = (window.innerHeight <= 400) ? 1 : 3;
+    this.breakpointPosters = (window.innerHeight <= 400) ? 1 : 4;
     this.route.params.subscribe(params =>{
       const idMovie: number = +params['id'];
       this.movieService.getMovieDetails(idMovie).subscribe(
@@ -46,4 +52,28 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-}
+  onResize(event) {
+    // rules for posters
+    if ((event.target.innerWidth <= 400) && (event.target.innerWidth > 0)) {
+      this.breakpointPosters = 1;
+    } else if ((event.target.innerWidth <= 800) && (event.target.innerWidth > 400)) {
+      this.breakpointPosters = 2;
+    } else if ((event.target.innerWidth <= 1200) && (event.target.innerWidth > 800)) {
+      this.breakpointPosters = 3;
+    } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
+      this.breakpointPosters = 4;
+    }
+
+    // rules for backdrops
+    if ((event.target.innerWidth <= 600) && (event.target.innerWidth > 0)) {
+      this.breakpointBackdrops = 1;
+    } else if ((event.target.innerWidth <= 1200) && (event.target.innerWidth > 600)) {
+      this.breakpointBackdrops = 2;
+    } else if ((event.target.innerWidth <= 1800) && (event.target.innerWidth > 1200)) {
+      this.breakpointBackdrops = 3;
+    } else if (event.target.innerWidth > 1800) {
+      this.breakpointBackdrops = 3;
+    }
+
+  }
+  }

@@ -1,7 +1,8 @@
 <section>
     <h1>Movies</h1>
 
-    <mat-grid-list  cols="4" gutterSize="5px" rowHeight="470px"rowHeight="470px">
+  <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
+    <!--<mat-grid-list cols="4" gutterSize="5px" rowHeight="3:4" >-->
         <mat-grid-tile *ngFor="let movie of movies" [colspan]="1" [rowspan]="1">
             <mat-card class="movie" [routerLink]="['/movie', movie.id]">
 

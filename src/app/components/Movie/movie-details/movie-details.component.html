@@ -100,7 +100,7 @@
     <div *ngIf="movie.images.backdrops.length > 0; then backdropsTrue else elseBlock"></div>
     <ng-template #backdropsTrue>
       <h1>Backdrops</h1>
-      <mat-grid-list layout="row" cols="3" rowHeight="210px" gutterSize="5px" >
+      <mat-grid-list layout="row" [cols]="breakpointBackdrops" (window:resize)="onResize($event)" rowHeight="4:2" gutterSize="5px" >
         <mat-grid-tile *ngFor="let backdrop of movie.images.backdrops; let i = index" [colspan]="1" [rowspan]="1">
 
           <mat-card class="movie">
@@ -119,7 +119,7 @@
     <div *ngIf="movie.images.backdrops.length > 0; then postersTrue else elseBlock"></div>
     <ng-template #postersTrue>
       <h1>Posters</h1>
-      <mat-grid-list layout="row" cols="4" rowHeight="470px" gutterSize="5px" >
+      <mat-grid-list layout="row" [cols]="breakpointPosters" (window:resize)="onResize($event)" rowHeight="3:4" gutterSize="5px" >
         <mat-grid-tile *ngFor="let poster of movie.images.posters; let i = index" [colspan]="1" [rowspan]="1">
 
           <mat-card class="movie">
@@ -134,9 +134,22 @@
 
   </mat-tab>
 
-  <!--  Tab to show the characters of the movie -->
+  <!--  Tab to show the cast of the movie -->
   <mat-tab label="Cast" *ngIf="movie.credits.cast.length > 0">
+    <div *ngIf="movie.credits.cast.length > 0; then castTrue else elseBlock"></div>
+    <ng-template #castTrue>
+      <mat-grid-list layout="row" cols="5" rowHeight="2:3" gutterSize="5px" >
+        <mat-grid-tile *ngFor="let person of movie.credits.cast; let i = index" [colspan]="1" [rowspan]="1">
 
+          <mat-card >
+            <img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">
+          </mat-card>
+
+
+          <mat-grid-tile-footer>{{person.name}} as {{person.character}}</mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
   </mat-tab>
 
   <!--  Tab to show the crew of the movie -->
