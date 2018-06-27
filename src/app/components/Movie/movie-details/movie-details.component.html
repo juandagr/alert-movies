@@ -2,11 +2,10 @@
 
   <!--  Tab to show the general details of the movie -->
   <mat-tab label="General">
-    <div *ngIf="movie.backdrop_path"
+    <div class="bg-image" *ngIf="movie.backdrop_path"
          [ngStyle]="{'background-image': 'url(' + image + ')'}">
-      <p>adsadsad</p>
     </div>
-    <div class="cont" fxLayout="row" >
+    <div fxLayout="row" fxLayoutAlign="center center" class="cont">
       <div class="image_content">
 
         <!-- movie poster image -->
@@ -36,11 +35,25 @@
         <div >
         <span>
           <!--<p>{{ (movie.overview.length > 500) ? (movie.overview | slice:0:100) + '....' : (movie.overview) }}</p>-->
-          <p>{{movie.overview}}</p>
+          <p class="parrafo">{{movie.overview}}</p>
         </span>
         </div>
 
         <mat-divider></mat-divider>
+
+        <!-- crew 
+        <div *ngIf="movie.credits.crew.length > 0; else noCrewBlock" class="row" fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+        <div *ngFor="let person of movie.credits.crew | slice:0:8" layout="column">
+          <a [routerLink]="['/person', person.id]" class="crew">
+            <strong class="tc-white">{{person['name']}}</strong>
+          </a> 
+          <div>
+            <a>{{person.name}}</a>
+            <span>{{person.job}}</span>
+          </div>
+          
+        </div>
+      </div>-->
 
         <!-- Last Icons -->
         <ul class="icons">
@@ -138,10 +151,10 @@
   <mat-tab label="Cast" *ngIf="movie.credits.cast.length > 0">
     <div *ngIf="movie.credits.cast.length > 0; then castTrue else elseBlock"></div>
     <ng-template #castTrue>
-      <mat-grid-list layout="row" cols="5" rowHeight="2:3" gutterSize="5px" >
+      <mat-grid-list layout="row" cols="5" rowHeight="2:2.6" gutterSize="5px" >
         <mat-grid-tile *ngFor="let person of movie.credits.cast; let i = index" [colspan]="1" [rowspan]="1">
 
-          <mat-card >
+          <mat-card class="movie">
             <img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">
           </mat-card>
 
@@ -152,13 +165,34 @@
     </ng-template>
   </mat-tab>
 
-  <!--  Tab to show the crew of the movie -->
+  <!--  Tab to show the crew of the movie 
   <mat-tab label="Crew" *ngIf="movie.credits.crew.length > 0">
 
-  </mat-tab>
+  </mat-tab>-->
 
   <!--  Tab to show the movies similar to this-->
   <mat-tab label="Similar" *ngIf="movie.similar.total_results > 0">
+      <mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
+          <!--<mat-grid-list cols="4" gutterSize="5px" rowHeight="3:4" >-->
+              <mat-grid-tile *ngFor="let movieSimilar of movie.similar.results" [colspan]="1" [rowspan]="1">
+                  <mat-card class="movie" (click)="changeTab()" [routerLink]="['/movie', movieSimilar.id]" >
+      
+                      <!-- Poster Image -->
+                      <div *ngIf="movieSimilar.poster_path; then truePoster else falsePoster"></div>
+      
+                      <ng-template #truePoster>
+                          <img mat-card-image src="{{url_image_poster}}{{movieSimilar.poster_path}}">
+                      </ng-template>
+      
+                      <ng-template #falsePoster>
+                          <img mat-card-image  src="assets/no-poster.jpg">
+                      </ng-template>
+      
+                  </mat-card>
+              <mat-grid-tile-footer>{{movieSimilar.title}}</mat-grid-tile-footer>
+              </mat-grid-tile>
+      
+          </mat-grid-list>
 
 
   </mat-tab>

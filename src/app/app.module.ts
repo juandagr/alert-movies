@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatButtonModule, MatCheckboxModule, MatDividerModule, MatGridListModule, MatListModule, MatTabsModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatDividerModule, MatGridListModule, MatListModule, MatTabsModule, MatDialogModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {HttpModule} from '@angular/http';
@@ -45,6 +45,7 @@ import { MovieDetailsComponent } from './components/Movie/movie-details/movie-de
     MatGridListModule,
     MatTabsModule,
     MatDividerModule,
+    MatDialogModule,
     CovalentLayoutModule,
     CovalentStepsModule,
     CovalentPagingModule

@@ -76,4 +76,9 @@ export class MovieDetailsComponent implements OnInit {
     }
 
   }
+
+  // Function to change the tab
+  changeTab() {
+    this.tabIndex = 0;
   }
+}
