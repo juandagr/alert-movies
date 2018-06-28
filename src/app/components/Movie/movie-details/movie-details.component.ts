@@ -43,6 +43,9 @@ export class MovieDetailsComponent implements OnInit {
           if (this.movie.backdrop_path) {
             this.image = this.apiImgBack + this.movie.backdrop_path;
             console.log(this.image);
+          } else {
+            this.image = "assets/background.jpg";
+            console.log(this.image);
           }
         },
         (error: any) => {

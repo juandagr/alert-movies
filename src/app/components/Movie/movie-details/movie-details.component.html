@@ -2,7 +2,7 @@
 
   <!--  Tab to show the general details of the movie -->
   <mat-tab label="General">
-    <div class="bg-image" *ngIf="movie.backdrop_path"
+    <div class="bg-image" *ngIf="image"
          [ngStyle]="{'background-image': 'url(' + image + ')'}">
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="cont">
@@ -24,9 +24,9 @@
       <div class="details">
 
         <!-- Movie Title -->
-        <div class="movieTitle">
+        <div>
           <span>
-            <h2>{{movie.title}}</h2>
+            <h2  class="movieTitle" >{{movie.title}}</h2>
           </span>
         </div>
 
@@ -35,7 +35,7 @@
         <div >
         <span>
           <!--<p>{{ (movie.overview.length > 500) ? (movie.overview | slice:0:100) + '....' : (movie.overview) }}</p>-->
-          <p class="parrafo">{{movie.overview}}</p>
+          <p>{{movie.overview}}</p>
         </span>
         </div>
 
