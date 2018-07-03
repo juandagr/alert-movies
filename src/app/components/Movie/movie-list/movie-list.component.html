@@ -1,10 +1,10 @@
 <section>
     <h1>Movies</h1>
-
   <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
     <!--<mat-grid-list cols="4" gutterSize="5px" rowHeight="3:4" >-->
         <mat-grid-tile *ngFor="let movie of movies" [colspan]="1" [rowspan]="1">
-            <mat-card class="movie" [routerLink]="['/movie', movie.id]">
+          <div class="container">
+            <mat-card class="movie" >
 
                 <!-- Poster Image -->
                 <div *ngIf="movie.poster_path; then truePoster else falsePoster"></div>
@@ -17,7 +17,17 @@
                     <img mat-card-image  src="assets/no-poster.jpg">
                 </ng-template>
 
+
             </mat-card>
+            <div class="middle">
+              <div class="text">
+                <h2>{{movie.title}}  </h2>
+                <h3>{{movie.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+                <p><b>{{ (movie.overview.length > 150) ? (movie.overview | slice:0:150) + '....' : (movie.overview) }}</b></p>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', movie.id]"> Details </button>
+              </div>
+            </div>
+          </div>
         <mat-grid-tile-footer>{{movie.title}}</mat-grid-tile-footer>
         </mat-grid-tile>
 

@@ -8,7 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {HttpModule} from '@angular/http';
 
-//covalent
+// covalent
 import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentStepsModule  } from '@covalent/core/steps';
 import { CovalentPagingModule } from '@covalent/core/paging';

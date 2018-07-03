@@ -27,7 +27,8 @@ export class MovieService {
                 id: item.id,
                 title: item.title,
                 vote_average: item.vote_average,
-                poster_path : item.poster_path
+                poster_path : item.poster_path,
+                overview: item.overview
               };
             });
           }
