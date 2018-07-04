@@ -15,6 +15,11 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * https://developers.themoviedb.org/3/movies/popular
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
   getPopularMovies(page: number): Observable<any> {
     const url = (this.apiUrl + '/movie/popular' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
     return this.http
@@ -37,6 +42,11 @@ export class MovieService {
         ));
   }
 
+  /**
+   * https://developers.themoviedb.org/3/movies/top_rated
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
   getTopRatedMovies(page: number): Observable<any> {
     const url = (this.apiUrl + '/movie/top_rated' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
     return this.http
@@ -49,7 +59,64 @@ export class MovieService {
                 id: item.id,
                 title: item.title,
                 vote_average: item.vote_average,
-                poster_path : item.poster_path
+                poster_path : item.poster_path,
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
+              };
+            });
+          }
+        ));
+  }
+
+  /**
+   * https://developers.themoviedb.org/3/movies/now_playing
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
+  getNowPlayingMovies(page: number): Observable<any> {
+    const url = (this.apiUrl + '/movie/now_playing' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            return data.results.map((item) => {
+              return {
+                id: item.id,
+                title: item.title,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
+              };
+            });
+          }
+        ));
+  }
+
+  /**
+   * https://developers.themoviedb.org/3/movies/upcoming
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
+  getUpcomingMovies(page: number): Observable<any> {
+    const url = (this.apiUrl + '/movie/upcoming' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            return data.results.map((item) => {
+              return {
+                id: item.id,
+                title: item.title,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
               };
             });
           }
@@ -65,7 +132,6 @@ export class MovieService {
       .pipe(
         map(
           (data: any) => {
-            console.log(data, "dataaaa");
             return {
               id: data.id,
               title: data.title,
