@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../../services/movie.service';
 import { IPageChangeEvent } from '@covalent/core/paging';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class MovieListComponent implements OnInit {
 
-  movies = [];
+  eventLinks: IPageChangeEvent;
+  movies: any[];
   page = 1;
   url_image = 'https://image.tmdb.org/t/p/w500';
   // used for responsive
@@ -24,16 +25,18 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    public router: Router) { }
+    public router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.currentPage = +this.route.snapshot.paramMap.get('page');
     this.getMoviesActualPage();
     this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
   }
 
   changePage(event: IPageChangeEvent): void {
     this.currentPage = event.page;
-    this.router.navigate(['/list-movies/popular', {'page': this.currentPage}]);
+    this.router.navigate(['/list-movies/popular', this.currentPage]);
     this.getMoviesActualPage();
 
   }
@@ -42,8 +45,8 @@ export class MovieListComponent implements OnInit {
     this.movieService.getPopularMovies(this.currentPage).subscribe(
       (data: any ) => {
         this.movies = data;
-        this.totalResults = this.movies['total_results'] <= 20000 ? this.movies['total_results'] : 20000;
-        this.totalPages = this.movies['total_pages'] <= 1000 ? this.movies['total_pages'] : 1000;
+        this.totalResults = this.movies[0].total_results;
+        this.totalPages = this.movies[0].total_pages;
       },
       (error: any) => {
         console.log(error);
@@ -61,6 +64,13 @@ export class MovieListComponent implements OnInit {
     } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
       this.breakpoint = 4;
     }
+  }
+
+  changeLinks(event: IPageChangeEvent): void {
+    this.eventLinks = event;
+    this.page = this.eventLinks.page;
+    this.router.navigate(['/list-movies/popular', this.page]);
+    this.getMoviesActualPage();
   }
 
 }

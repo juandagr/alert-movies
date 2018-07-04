@@ -3,7 +3,16 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatButtonModule, MatCheckboxModule, MatDividerModule, MatGridListModule, MatListModule, MatTabsModule, MatDialogModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDividerModule,
+  MatGridListModule,
+  MatListModule,
+  MatTabsModule,
+  MatDialogModule,
+  MatTooltipModule
+} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {HttpModule} from '@angular/http';
@@ -20,13 +29,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieListComponent } from './components/Movie/movie-list/movie-list.component';
 import { MovieDetailsComponent } from './components/Movie/movie-details/movie-details.component';
+import { MovieListTopComponent } from './components/Movie/movie-list-top/movie-list-top.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieListComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MovieListTopComponent,
   ],
   imports: [
     CommonModule,
@@ -46,12 +58,13 @@ import { MovieDetailsComponent } from './components/Movie/movie-details/movie-de
     MatTabsModule,
     MatDividerModule,
     MatDialogModule,
+    MatTooltipModule,
     CovalentLayoutModule,
     CovalentStepsModule,
     CovalentPagingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopComponent]
 })
 export class AppModule { }

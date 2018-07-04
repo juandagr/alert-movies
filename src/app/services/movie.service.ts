@@ -28,7 +28,9 @@ export class MovieService {
                 title: item.title,
                 vote_average: item.vote_average,
                 poster_path : item.poster_path,
-                overview: item.overview
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
               };
             });
           }
@@ -63,6 +65,7 @@ export class MovieService {
       .pipe(
         map(
           (data: any) => {
+            console.log(data, "dataaaa");
             return {
               id: data.id,
               title: data.title,
@@ -79,7 +82,11 @@ export class MovieService {
               release_date: data.release_date,
               revenue: data.revenue,
               budget: data.budget,
-              homepage: data.homepage
+              homepage: data.homepage,
+              original_language: data.original_language,
+              production_companies: data.production_companies
+
+
             };
           }
         ));

@@ -21,88 +21,86 @@
 
       </div>
 
-      <div class="details">
+      <div class="details"  fxLayout="column" >
 
         <!-- Movie Title -->
-        <div>
-          <span>
-            <h2  class="movieTitle" >{{movie.title}}</h2>
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <div fxLayout="column" fxLayoutAlign="end center" class="single_icon">
+            <mat-icon >event</mat-icon>
+            <p>{{movie.release_date | date}}</p>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="start center">
+            <span>
+            <h1  class="movieTitle" >{{movie.title}}</h1>
           </span>
+            <mat-chip-list *ngIf="movie.genres" >
+              <mat-chip color="whitesmoke" *ngFor="let genre of movie.genres" style="font-size: 12px; height: 20px; width: auto; margin-bottom: 15px">
+                {{genre.name}}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start center" class="single_icon" (click)="openTrailer()" style="border-color: #cccccc; border-width: 1px">
+            <mat-icon style="font-size: 40px; margin-right: 15px" >play_arrow</mat-icon>
+            <span style="margin-top: 15px">Play trailer</span>
+          </div>
+
         </div>
 
-        <mat-divider></mat-divider>
+        <mat-divider class="md-divider"></mat-divider>
 
+        <!-- Movie overview -->
         <div >
         <span>
-          <!--<p>{{ (movie.overview.length > 500) ? (movie.overview | slice:0:100) + '....' : (movie.overview) }}</p>-->
           <p>{{movie.overview}}</p>
         </span>
         </div>
 
-        <mat-divider></mat-divider>
+        <mat-divider class="md-divider"></mat-divider>
 
-        <!-- crew
-        <div *ngIf="movie.credits.crew.length > 0; else noCrewBlock" class="row" fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="20px">
-        <div *ngFor="let person of movie.credits.crew | slice:0:8" layout="column">
-          <a [routerLink]="['/person', person.id]" class="crew">
-            <strong class="tc-white">{{person['name']}}</strong>
-          </a>
-          <div>
-            <a>{{person.name}}</a>
-            <span>{{person.job}}</span>
+        <!-- Movie details -->
+        <div fxLayout="row" fxLayoutAlign="space-around center" >
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.runtime">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+              <mat-icon>access_time</mat-icon>
+              <div fxLayout="column" fxLayoutAlign="start center" >
+                <p>Runtime<br/>{{convertTime(movie.runtime)}}</p>
+              </div>
+            </div>
           </div>
 
-        </div>
-      </div>-->
-
-        <!-- Last Icons -->
-        <ul class="icons">
-          <li class="single_icon" *ngIf="movie.release_date">
-            <div>
-              <mat-icon>event</mat-icon>
-            </div>
-            <div class="text">Release <br>Date</div>
-            <div>: {{movie.release_date}}</div>
-          </li>
-          <li class="single_icon" *ngIf="movie.runtime">
-            <div>
-              <mat-icon>access_time</mat-icon>
-            </div>
-            <div class="text">Duration</div>
-            <div>
-              : {{movie.runtime}} mins.
-            </div>
-          </li>
-          <li class="single_icon" *ngIf="movie.revenue > 0">
-            <div>
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.revenue > 0">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>attach_money</mat-icon>
+              <div fxLayout="column" fxLayoutAlign="start center" >
+                <p>Revenue<br/>{{movie.revenue| currency}}</p>
+              </div>
             </div>
-            <div class="text">Revenue</div>
-            <div>
-              : {{movie.revenue | currency}}
-            </div>
-          </li>
-        </ul>
-        <ul class="icons">
-          <li class="single_icon" *ngIf="movie.budget > 0">
-            <div>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.budget > 0">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>money_off</mat-icon>
+              <div fxLayout="column" fxLayoutAlign="start center" >
+                <p>Budget<br/>{{movie.budget| currency}}</p>
+              </div>
             </div>
-            <div class="text">Budget</div>
-            <div>
-              : {{movie.budget | currency}}
+          </div>
+        </div>
+
+        <mat-divider class="md-divider"></mat-divider>
+
+        <!-- Movie companies -->
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center" *ngIf="movie.production_companies"  >
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngFor="let companie of movie.production_companies">
+            <div *ngIf="companie.logo_path">
+              <div fxLayout="row" fxLayoutAlign="space-around center" >
+                <img class="companie_logo" matTooltip="{{companie.name}}"  src="{{url_images_backdrops}}{{companie.logo_path}}" alt="companie logo">
             </div>
-          </li>
-          <li class="single_icon" *ngIf="movie.homepage">
-            <div>
-              <mat-icon>home</mat-icon>
-            </div>
-            <div class="text">Home <br>Page</div>
-            <div>
-              : <a href="{{movie.homepage}}">Official Page</a>
-            </div>
-          </li>
-        </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -227,26 +225,42 @@
   <!--  Tab to show the movies similar to this-->
   <mat-tab label="Similar" *ngIf="movie.similar.total_results > 0">
       <mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
-          <!--<mat-grid-list cols="4" gutterSize="5px" rowHeight="3:4" >-->
-              <mat-grid-tile *ngFor="let movieSimilar of movie.similar.results" [colspan]="1" [rowspan]="1">
-                  <mat-card class="movie" (click)="changeTab()" [routerLink]="['/movie', movieSimilar.id]" >
+        <mat-grid-tile *ngFor="let movieSimilar of movie.similar.results" [colspan]="1" [rowspan]="1">
+          <div class="container">
+            <mat-card class="movie" >
 
-                      <!-- Poster Image -->
-                      <div *ngIf="movieSimilar.poster_path; then truePoster else falsePoster"></div>
+              <!-- Poster Image -->
+              <div *ngIf="movieSimilar.poster_path; then truePoster else falsePoster"></div>
 
-                      <ng-template #truePoster>
-                          <img mat-card-image src="{{url_image_poster}}{{movieSimilar.poster_path}}">
-                      </ng-template>
+              <ng-template #truePoster>
+                <img mat-card-image src="{{url_image_poster}}{{movieSimilar.poster_path}}">
+              </ng-template>
 
-                      <ng-template #falsePoster>
-                          <img mat-card-image  src="assets/no-poster.jpg">
-                      </ng-template>
+              <ng-template #falsePoster>
+                <img mat-card-image  src="assets/no-poster.jpg">
+              </ng-template>
 
-                  </mat-card>
-              <mat-grid-tile-footer>{{movieSimilar.title}}</mat-grid-tile-footer>
-              </mat-grid-tile>
 
-          </mat-grid-list>
+            </mat-card>
+            <div class="middle">
+              <div class="text">
+
+                <div fxLayout="column" fxLayoutAlign="center" >
+                  <h2>{{movieSimilar.title}}</h2>
+                  <div fxLayout="row" fxLayoutAlign="space-around center" >
+                    <h3 style="margin: auto">{{movieSimilar.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+                  </div>
+                  <p><b>{{ (movieSimilar.overview.length > 150) ? (movieSimilar.overview | slice:0:150) + '....' : (movieSimilar.overview) }}</b></p>
+                  <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', movieSimilar.id]" (click)="changeTab()"> Details </button>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <mat-grid-tile-footer>{{movieSimilar.title}}</mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
 
 
   </mat-tab>

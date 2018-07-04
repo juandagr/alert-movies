@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../../services/movie.service';
 import { ActivatedRoute } from '@angular/router';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {MatDialog} from '@angular/material';
+import {MovieListTopComponent} from '../movie-list-top/movie-list-top.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,6 +15,7 @@ export class MovieDetailsComponent implements OnInit {
   // Attributes
   movie;
   id: number;
+  trustedDashboardUrl: SafeUrl;
   videoURL: string;
   tabIndex = 0;
   position = 'right';
@@ -27,16 +31,23 @@ export class MovieDetailsComponent implements OnInit {
 
 
   constructor(
-    private movieService:  MovieService,
-    private route: ActivatedRoute) { }
+    private movieService: MovieService,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.breakpointBackdrops = (window.innerHeight <= 400) ? 1 : 3;
     this.breakpointPosters = (window.innerHeight <= 400) ? 1 : 4;
-    this.route.params.subscribe(params =>{
+    this.getMovieDetails();
+  }
+
+  getMovieDetails() {
+    this.route.params.subscribe(params => {
       const idMovie: number = +params['id'];
       this.movieService.getMovieDetails(idMovie).subscribe(
-        (data: any ) => {
+        (data: any) => {
           this.movie = data;
           console.log(data);
 
@@ -46,6 +57,16 @@ export class MovieDetailsComponent implements OnInit {
           } else {
             this.image = "assets/background.jpg";
             console.log(this.image);
+          }
+
+          if (this.movie.videos) {
+            for (let i = 0; i < this.movie.videos.results.length; i++) {
+              if (this.movie.videos.results[i].type === 'Trailer') {
+                this.videoURL = 'https://www.youtube.com/embed/' + this.movie.videos.results[i].key + '?autoplay=1';
+                this.trustedDashboardUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoURL);
+                break;
+              }
+            }
           }
         },
         (error: any) => {
@@ -83,5 +104,35 @@ export class MovieDetailsComponent implements OnInit {
   // Function to change the tab
   changeTab() {
     this.tabIndex = 0;
+  }
+
+  /**
+   * gets the time in minutes and returns it in HH:mm format
+   * @param minutes: Integer with the minutes
+   * @returns {string}: Time with the new format
+   */
+  convertTime(minutes: number): string {
+    let result = '';
+    if (minutes) {
+      const hours = Math.floor(minutes / 60);
+      if (hours >= 1) {
+        result += hours + 'h ';
+      }
+      if (minutes % 60 !== 0) {
+        result += (minutes % 60) + 'min';
+      }
+    }
+    return result;
+  }
+
+  // Function to open and play the trailer
+  openTrailer(): void {
+    const dialogRef = this.dialog.open(MovieListTopComponent, {
+      width: '760px',
+      height: '560px',
+      data: {
+        url: this.trustedDashboardUrl
+      }
+    });
   }
 }
