@@ -2,7 +2,7 @@
   <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="2:2.6">
     <mat-grid-tile *ngFor="let person of people" [colspan]="1" [rowspan]="1">
       <div class="container">
-        <mat-card class="person_card" >
+        <mat-card class="person_card" [routerLink]="['/person', person.id]">
 
           <!-- Profile Image -->
           <div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>

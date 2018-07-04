@@ -26,8 +26,8 @@ export class PeopleService {
         map(
           (data: any) => {
             return data.results.map((item) => {
-              console.log(data);
               return {
+                id: item.id,
                 profile_path : item.profile_path,
                 know_for: item.know_for,
                 name: item.name,
@@ -36,6 +36,35 @@ export class PeopleService {
                 total_results: data.total_results
               };
             });
+          }
+        ));
+  }
+
+  /**
+   * https://developers.themoviedb.org/3/person/id
+   * @param id: The number id of the person for search
+   * @returns {Observable<any>}
+   */
+  getPersonDetails(id: number): Observable<any> {
+    const append = '&append_to_response=movie_credits,tv_credits';
+    const url = (this.apiUrl + '/person/' + id + '?api_key=' + this.apiKey  + append);
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            console.log(data);
+            return {
+              profile_path : data.profile_path,
+              name: data.name,
+              popularity: data.popularity,
+              biography: data.biography,
+              birthday: data.birthday,
+              gender: data.gender,
+              movie_credits: data.movie_credits,
+              place_of_birth: data.place_of_birth,
+              tv_credits: data.tv_credits
+            };
           }
         ));
   }

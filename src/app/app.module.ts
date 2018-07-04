@@ -32,6 +32,7 @@ import { MovieDetailsComponent } from './components/Movie/movie-details/movie-de
 import { MovieListTopRatedComponent } from './components/Movie/movie-list-top-rated/movie-list-top-rated.component';
 import { ListPopularPeopleComponent } from './components/People/list-popular-people/list-popular-people.component';
 import { TrailerComponent } from './components/Movie/trailer/trailer.component';
+import { PersonDetailComponent } from './components/People/person-detail/person-detail.component';
 
 
 
@@ -43,6 +44,7 @@ import { TrailerComponent } from './components/Movie/trailer/trailer.component';
     MovieListTopRatedComponent,
     ListPopularPeopleComponent,
     TrailerComponent,
+    PersonDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +72,6 @@ import { TrailerComponent } from './components/Movie/trailer/trailer.component';
   providers: [],
   entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent]
 })
 export class AppModule { }
