@@ -30,6 +30,7 @@ import { AppComponent } from './app.component';
 import { MovieListComponent } from './components/Movie/movie-list/movie-list.component';
 import { MovieDetailsComponent } from './components/Movie/movie-details/movie-details.component';
 import { MovieListTopComponent } from './components/Movie/movie-list-top/movie-list-top.component';
+import { MovieListTopRatedComponent } from './components/Movie/movie-list-top-rated/movie-list-top-rated.component';
 
 
 
@@ -39,6 +40,7 @@ import { MovieListTopComponent } from './components/Movie/movie-list-top/movie-l
     MovieListComponent,
     MovieDetailsComponent,
     MovieListTopComponent,
+    MovieListTopRatedComponent,
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,6 @@ import { MovieListTopComponent } from './components/Movie/movie-list-top/movie-l
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopComponent, MovieListTopRatedComponent]
 })
 export class AppModule { }

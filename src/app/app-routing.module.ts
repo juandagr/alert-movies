@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { MovieListComponent } from './components/Movie/movie-list/movie-list.component';
 import { MovieDetailsComponent } from './components/Movie/movie-details/movie-details.component';
 import {MovieListTopComponent} from './components/Movie/movie-list-top/movie-list-top.component';
+import {MovieListTopRatedComponent} from './components/Movie/movie-list-top-rated/movie-list-top-rated.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/list-movies/popular/1', pathMatch: 'full' },
   { path: 'list-movies/popular/:page', component: MovieListComponent },
-  { path: 'list-movies/top_rated/:page', component: MovieListTopComponent },
+  { path: 'list-movies/top_rated/:page', component: MovieListTopRatedComponent },
   { path: 'movie/:id', component: MovieDetailsComponent },
 
 ];

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from '../../../services/movie.service';
-import { IPageChangeEvent } from '@covalent/core/paging';
-import { ActivatedRoute, Router } from '@angular/router';
+import {IPageChangeEvent} from '@covalent/core/paging';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MovieService} from '../../../services/movie.service';
 
 @Component({
-  selector: 'app-movie-list',
-  templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  selector: 'app-movie-list-top-rated',
+  templateUrl: './movie-list-top-rated.component.html',
+  styleUrls: ['./movie-list-top-rated.component.scss']
 })
-export class MovieListComponent implements OnInit {
+export class MovieListTopRatedComponent implements OnInit {
 
   // Attributes
   eventLinks: IPageChangeEvent;
@@ -27,7 +27,8 @@ export class MovieListComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     public router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.currentPage = +this.route.snapshot.paramMap.get('page');
@@ -43,7 +44,7 @@ export class MovieListComponent implements OnInit {
   }
 
   getMoviesActualPage() {
-    this.movieService.getPopularMovies(this.currentPage).subscribe(
+    this.movieService.getTopRatedMovies(this.currentPage).subscribe(
       (data: any ) => {
         this.movies = data;
         this.totalResults = this.movies[0].total_results;
@@ -73,6 +74,4 @@ export class MovieListComponent implements OnInit {
     this.router.navigate(['/list-movies/popular', this.page]);
     this.getMoviesActualPage();
   }
-
 }
-
