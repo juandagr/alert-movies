@@ -29,9 +29,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieListComponent } from './components/Movie/movie-list/movie-list.component';
 import { MovieDetailsComponent } from './components/Movie/movie-details/movie-details.component';
-import { MovieListTopComponent } from './components/Movie/movie-list-top/movie-list-top.component';
 import { MovieListTopRatedComponent } from './components/Movie/movie-list-top-rated/movie-list-top-rated.component';
 import { ListPopularPeopleComponent } from './components/People/list-popular-people/list-popular-people.component';
+import { TrailerComponent } from './components/Movie/trailer/trailer.component';
 
 
 
@@ -40,9 +40,9 @@ import { ListPopularPeopleComponent } from './components/People/list-popular-peo
     AppComponent,
     MovieListComponent,
     MovieDetailsComponent,
-    MovieListTopComponent,
     MovieListTopRatedComponent,
     ListPopularPeopleComponent,
+    TrailerComponent,
   ],
   imports: [
     CommonModule,
@@ -68,7 +68,8 @@ import { ListPopularPeopleComponent } from './components/People/list-popular-peo
     CovalentPagingModule
   ],
   providers: [],
+  entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopComponent, MovieListTopRatedComponent, ListPopularPeopleComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent]
 })
 export class AppModule { }

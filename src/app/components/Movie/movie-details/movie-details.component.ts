@@ -3,7 +3,7 @@ import { MovieService } from '../../../services/movie.service';
 import { ActivatedRoute } from '@angular/router';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {MatDialog} from '@angular/material';
-import {MovieListTopComponent} from '../movie-list-top/movie-list-top.component';
+import {TrailerComponent} from '../trailer/trailer.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -127,7 +127,7 @@ export class MovieDetailsComponent implements OnInit {
 
   // Function to open and play the trailer
   openTrailer(): void {
-    const dialogRef = this.dialog.open(MovieListTopComponent, {
+    const dialogRef = this.dialog.open(TrailerComponent, {
       width: '760px',
       height: '560px',
       data: {

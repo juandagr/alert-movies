@@ -1,12 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {MovieListTopComponent} from '../movie-list-top/movie-list-top.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
-  selector: 'app-movie-list-top',
-  templateUrl: './movie-list-top.component.html',
-  styleUrls: ['./movie-list-top.component.scss']
+  selector: 'app-trailer',
+  templateUrl: './trailer.component.html',
+  styleUrls: ['./trailer.component.scss']
 })
-export class MovieListTopComponent implements OnInit {
+export class TrailerComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<MovieListTopComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -14,7 +15,6 @@ export class MovieListTopComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
   ngOnInit() {
   }
 
