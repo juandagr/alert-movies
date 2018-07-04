@@ -18,7 +18,7 @@ export class PeopleService {
    * @param page: The number of the page for the search
    * @returns {Observable<any>}
    */
-  getPopularMovies(page: number): Observable<any> {
+  getPopularPeople(page: number): Observable<any> {
     const url = (this.apiUrl + '/person/popular' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
     return this.http
       .get(url)

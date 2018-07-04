@@ -1,0 +1,33 @@
+<section>
+  <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="2:2.6">
+    <mat-grid-tile *ngFor="let person of people" [colspan]="1" [rowspan]="1">
+      <div class="container">
+        <mat-card class="person_card" >
+
+          <!-- Profile Image -->
+          <div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>
+
+          <ng-template #trueProfileImg>
+            <img mat-card-image src="{{url_image}}{{person.profile_path}}">
+          </ng-template>
+
+          <ng-template #falseProfileImg>
+            <img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">
+          </ng-template>
+
+
+        </mat-card>
+
+      </div>
+      <mat-grid-tile-footer>{{person.name}}</mat-grid-tile-footer>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <!--paginator-->
+  <td-paging-bar class="list" #pagingBarLinks pageLinkCount="5" [firstLast]="false" [initialPage]="currentPage" [pageSize]="1" [total]="totalPages" (change)="changePage($event)">
+    <span hide-xs>Currently on page: {{currentPage}} of {{totalPages}} ({{totalResults}} results)</span>
+  </td-paging-bar>
+
+
+</section>

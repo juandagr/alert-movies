@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from '../../../services/movie.service';
-import { IPageChangeEvent } from '@covalent/core/paging';
-import { ActivatedRoute, Router } from '@angular/router';
+import {IPageChangeEvent} from '@covalent/core/paging';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PeopleService} from '../../../services/people.service';
 
 @Component({
-  selector: 'app-movie-list',
-  templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  selector: 'app-list-popular-people',
+  templateUrl: './list-popular-people.component.html',
+  styleUrls: ['./list-popular-people.component.scss']
 })
-export class MovieListComponent implements OnInit {
+export class ListPopularPeopleComponent implements OnInit {
 
   // Attributes
   eventLinks: IPageChangeEvent;
-  movies: any[];
+  people: any[];
   page = 1;
   url_image = 'https://image.tmdb.org/t/p/w500';
+
   // used for responsive
   breakpoint;
 
@@ -25,14 +26,14 @@ export class MovieListComponent implements OnInit {
   totalPages: number;
 
   constructor(
-    private movieService: MovieService,
+    private peopleService: PeopleService,
     public router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.currentPage = +this.route.snapshot.paramMap.get('page');
-    this.getMoviesActualPage();
-    this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
+    this.getPeopleActualPage();
+    this.breakpoint = (window.innerHeight <= 400) ? 1 : 5;
   }
 
   /**
@@ -41,18 +42,18 @@ export class MovieListComponent implements OnInit {
    */
   changePage(event: IPageChangeEvent): void {
     this.currentPage = event.page;
-    this.router.navigate(['/list-movies/popular', this.currentPage]);
-    this.getMoviesActualPage();
+    this.router.navigate(['/people/popular', this.currentPage]);
+    this.getPeopleActualPage();
 
   }
 
   // Method for get the movies with the actual page
-  getMoviesActualPage() {
-    this.movieService.getPopularMovies(this.currentPage).subscribe(
+  getPeopleActualPage() {
+    this.peopleService.getPopularPeople(this.currentPage).subscribe(
       (data: any ) => {
-        this.movies = data;
-        this.totalResults = this.movies[0].total_results;
-        this.totalPages = this.movies[0].total_pages;
+        this.people = data;
+        this.totalResults = this.people[0].total_results;
+        this.totalPages = this.people[0].total_pages;
       },
       (error: any) => {
         console.log(error);
@@ -65,14 +66,16 @@ export class MovieListComponent implements OnInit {
    * @param event: Event of change the page size
    */
   onResize(event) {
-    if ((event.target.innerWidth <= 400) && (event.target.innerWidth > 0)) {
+    if ((event.target.innerWidth <= 360) && (event.target.innerWidth > 0)) {
       this.breakpoint = 1;
-    } else if ((event.target.innerWidth <= 800) && (event.target.innerWidth > 400)) {
+    } else if ((event.target.innerWidth <= 560) && (event.target.innerWidth > 360)) {
       this.breakpoint = 2;
-    } else if ((event.target.innerWidth <= 1200) && (event.target.innerWidth > 800)) {
+    } else if ((event.target.innerWidth <= 840) && (event.target.innerWidth > 560)) {
       this.breakpoint = 3;
-    } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
+    } else if ((event.target.innerWidth <= 1200) && (event.target.innerWidth > 840)) {
       this.breakpoint = 4;
+    } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
+      this.breakpoint = 5;
     }
   }
 
@@ -84,8 +87,6 @@ export class MovieListComponent implements OnInit {
     this.eventLinks = event;
     this.page = this.eventLinks.page;
     this.router.navigate(['/list-movies/popular', this.page]);
-    this.getMoviesActualPage();
+    this.getPeopleActualPage();
   }
-
 }
-
