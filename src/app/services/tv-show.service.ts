@@ -42,12 +42,68 @@ export class TvShowService {
   }
 
   /**
-   * https://developers.themoviedb.org/3/tv/get-popular-tv-shows
+   * https://developers.themoviedb.org/3/tv/get-tv-shows-on-the-air
    * @param page: The number of the page for the search
    * @returns {Observable<any>}
    */
   getrTvShowOnAir(page: number): Observable<any> {
     const url = (this.apiUrl + '/tv/on_the_air' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            return data.results.map((item) => {
+              console.log(data)
+              return {
+                id: item.id,
+                name: item.name,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
+              };
+            });
+          }
+        ));
+  }
+
+  /**
+   * https://developers.themoviedb.org/3/tv/get-top-rated-tv
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
+  getTopRatedTv(page: number): Observable<any> {
+    const url = (this.apiUrl + '/tv/top_rated' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            return data.results.map((item) => {
+              console.log(data)
+              return {
+                id: item.id,
+                name: item.name,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
+              };
+            });
+          }
+        ));
+  }
+
+  /**
+   * https://developers.themoviedb.org/3/tv/get-latest-tv
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
+  getLatestTv(page: number): Observable<any> {
+    const url = (this.apiUrl + '/tv/latest' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
     return this.http
       .get(url)
       .pipe(
