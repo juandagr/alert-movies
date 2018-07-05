@@ -1,5 +1,5 @@
 <section>
-    <h1 class="title_list">Popular Movies</h1>
+  <h1 class="title_list">Popular Movies</h1>
   <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
     <!--<mat-grid-list cols="4" gutterSize="5px" rowHeight="3:4" >-->
         <mat-grid-tile *ngFor="let movie of movies" [colspan]="1" [rowspan]="1">

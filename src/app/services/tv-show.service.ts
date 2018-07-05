@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {
+export class TvShowService {
 
   private apiUrl = 'https://api.themoviedb.org/3';
   private apiKey = 'ba6ea2be925296a75cefe8a3b8daaba9';
@@ -14,25 +14,29 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   /**
-   * searches for movies, series and people
-   * https://developers.themoviedb.org/3/search/multi-search
-   * @param query: This is the text to search
+   * https://developers.themoviedb.org/3/tv/get-popular-tv-shows
    * @param page: The number of the page for the search
    * @returns {Observable<any>}
    */
-  searchMulti(query: string, page: number): Observable<any> {
-    const args = '&page=' + page + '&query=' + query;
-    const url = (this.apiUrl + '/search/multi' + '?api_key=' + this.apiKey + args);
+  getPopularTvShow(page: number): Observable<any> {
+    const url = (this.apiUrl + '/tv/popular' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
     return this.http
       .get(url)
       .pipe(
         map(
           (data: any) => {
+            return data.results.map((item) => {
+              console.log(data)
               return {
-                results: data.results,
+                id: item.id,
+                name: item.name,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
                 total_pages: data.total_pages,
                 total_results: data.total_results
               };
+            });
           }
         ));
   }
