@@ -26,7 +26,6 @@ export class TvShowService {
         map(
           (data: any) => {
             return data.results.map((item) => {
-              console.log(data)
               return {
                 id: item.id,
                 name: item.name,
@@ -54,7 +53,6 @@ export class TvShowService {
         map(
           (data: any) => {
             return data.results.map((item) => {
-              console.log(data)
               return {
                 id: item.id,
                 name: item.name,
@@ -82,7 +80,6 @@ export class TvShowService {
         map(
           (data: any) => {
             return data.results.map((item) => {
-              console.log(data)
               return {
                 id: item.id,
                 name: item.name,
@@ -103,14 +100,14 @@ export class TvShowService {
    * @returns {Observable<any>}
    */
   getLatestTv(page: number): Observable<any> {
-    const url = (this.apiUrl + '/tv/latest' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    const url = (this.apiUrl + '/tv/airing_today' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    console.log(url, 'URL');
     return this.http
       .get(url)
       .pipe(
         map(
           (data: any) => {
             return data.results.map((item) => {
-              console.log(data)
               return {
                 id: item.id,
                 name: item.name,

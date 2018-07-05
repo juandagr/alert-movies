@@ -41,6 +41,7 @@ import { TvListPopularComponent } from './components/TvShow/tv-list-popular/tv-l
 import { TvDetailsComponent } from './components/TvShow/tv-details/tv-details.component';
 import { TvListOnAirComponent } from './components/TvShow/tv-list-on-air/tv-list-on-air.component';
 import { TvListTopRatedComponent } from './components/TvShow/tv-list-top-rated/tv-list-top-rated.component';
+import { TvListLatestComponent } from './components/TvShow/tv-list-latest/tv-list-latest.component';
 
 
 
@@ -60,6 +61,7 @@ import { TvListTopRatedComponent } from './components/TvShow/tv-list-top-rated/t
     TvDetailsComponent,
     TvListOnAirComponent,
     TvListTopRatedComponent,
+    TvListLatestComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +91,6 @@ import { TvListTopRatedComponent } from './components/TvShow/tv-list-top-rated/t
   providers: [],
   entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent, TvListTopRatedComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent, TvListTopRatedComponent, TvListLatestComponent]
 })
 export class AppModule { }
