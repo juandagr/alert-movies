@@ -23,17 +23,17 @@ export class SearchService {
   searchMulti(query: string, page: number): Observable<any> {
     const args = '&page=' + page + '&query=' + query;
     const url = (this.apiUrl + '/search/multi' + '?api_key=' + this.apiKey + args);
+    console.log(url);
     return this.http
       .get(url)
       .pipe(
         map(
           (data: any) => {
-            return data.results.map((item) => {
-              console.log(data);
               return {
-
+                results: data.results,
+                total_pages: data.total_pages,
+                total_results: data.total_results
               };
-            });
           }
         ));
   }

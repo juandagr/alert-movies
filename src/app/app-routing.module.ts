@@ -7,6 +7,7 @@ import {ListPopularPeopleComponent} from './components/People/list-popular-peopl
 import {PersonDetailComponent} from './components/People/person-detail/person-detail.component';
 import {MovieListNowPlayingComponent} from './components/Movie/movie-list-now-playing/movie-list-now-playing.component';
 import {MovieListUpcomingComponent} from './components/Movie/movie-list-upcoming/movie-list-upcoming.component';
+import {SearchComponent} from './components/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/list-movies/popular/1', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'people/popular/:page', component: ListPopularPeopleComponent },
   { path: 'movie/:id', component: MovieDetailsComponent },
   { path: 'person/:id', component: PersonDetailComponent },
+  { path: 'search/:query/:page', component: SearchComponent },
 ];
 
 @NgModule({

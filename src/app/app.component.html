@@ -33,6 +33,11 @@
       <button mat-icon-button td-menu-button tdLayoutToggle>
         <mat-icon>menu</mat-icon>
       </button>
+
+      <td-search-box backIcon="arrow_back" placeholder="Search here" [showUnderline]="true"
+                     [debounce]="1000" [alwaysVisible]="false"
+                     (search)="handleSearch($event)" (clear)="searchInputTerm = ''">
+      </td-search-box>
       <div class="bgc-grey-300">
         <router-outlet></router-outlet>
       </div>

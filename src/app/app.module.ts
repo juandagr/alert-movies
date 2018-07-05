@@ -35,6 +35,8 @@ import { TrailerComponent } from './components/Movie/trailer/trailer.component';
 import { PersonDetailComponent } from './components/People/person-detail/person-detail.component';
 import { MovieListUpcomingComponent } from './components/Movie/movie-list-upcoming/movie-list-upcoming.component';
 import { MovieListNowPlayingComponent } from './components/Movie/movie-list-now-playing/movie-list-now-playing.component';
+import { SearchComponent } from './components/search/search.component';
+import {CovalentSearchModule} from '@covalent/core';
 
 
 
@@ -49,6 +51,7 @@ import { MovieListNowPlayingComponent } from './components/Movie/movie-list-now-
     PersonDetailComponent,
     MovieListUpcomingComponent,
     MovieListNowPlayingComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -72,11 +75,12 @@ import { MovieListNowPlayingComponent } from './components/Movie/movie-list-now-
     MatToolbarModule,
     CovalentLayoutModule,
     CovalentStepsModule,
-    CovalentPagingModule
+    CovalentPagingModule,
+    CovalentSearchModule
   ],
   providers: [],
   entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent]
 })
 export class AppModule { }
