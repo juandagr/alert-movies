@@ -178,7 +178,7 @@
                   <h3 style="margin: auto">{{tvCast.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
                 </div>
                 <p><b>{{ (tvCast.overview.length > 150) ? (tvCast.overview | slice:0:150) + '....' : (tvCast.overview) }}</b></p>
-                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', tvCast.id]" (click)="changeTab()"> Details </button>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/tv', tvCast.id]" (click)="changeTab()"> Details </button>
               </div>
 
 
@@ -264,7 +264,7 @@
                   <h3 style="margin: auto">{{crew.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
                 </div>
                 <p><b>{{ (crew.overview.length > 150) ? (crew.overview | slice:0:150) + '....' : (crew.overview) }}</b></p>
-                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', crew.id]" (click)="changeTab()"> Details </button>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/tv', crew.id]" (click)="changeTab()"> Details </button>
               </div>
 
 

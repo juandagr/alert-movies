@@ -41,6 +41,34 @@ export class TvShowService {
         ));
   }
 
+  /**
+   * https://developers.themoviedb.org/3/tv/get-popular-tv-shows
+   * @param page: The number of the page for the search
+   * @returns {Observable<any>}
+   */
+  getrTvShowOnAir(page: number): Observable<any> {
+    const url = (this.apiUrl + '/tv/on_the_air' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            return data.results.map((item) => {
+              console.log(data)
+              return {
+                id: item.id,
+                name: item.name,
+                vote_average: item.vote_average,
+                poster_path : item.poster_path,
+                overview: item.overview,
+                total_pages: data.total_pages,
+                total_results: data.total_results
+              };
+            });
+          }
+        ));
+  }
+
   getTvDetails(id: number): Observable<any> {
     const append = '&append_to_response=credits,images,similar,videos';
     const url = (this.apiUrl + '/tv/' + id + '?api_key=' + this.apiKey  + append);

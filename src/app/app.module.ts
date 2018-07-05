@@ -39,6 +39,7 @@ import { SearchComponent } from './components/search/search.component';
 import {CovalentSearchModule} from '@covalent/core';
 import { TvListPopularComponent } from './components/TvShow/tv-list-popular/tv-list-popular.component';
 import { TvDetailsComponent } from './components/TvShow/tv-details/tv-details.component';
+import { TvListOnAirComponent } from './components/TvShow/tv-list-on-air/tv-list-on-air.component';
 
 
 
@@ -56,6 +57,7 @@ import { TvDetailsComponent } from './components/TvShow/tv-details/tv-details.co
     SearchComponent,
     TvListPopularComponent,
     TvDetailsComponent,
+    TvListOnAirComponent,
   ],
   imports: [
     CommonModule,
@@ -85,6 +87,6 @@ import { TvDetailsComponent } from './components/TvShow/tv-details/tv-details.co
   providers: [],
   entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent]
 })
 export class AppModule { }
