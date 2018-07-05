@@ -40,6 +40,7 @@ import {CovalentSearchModule} from '@covalent/core';
 import { TvListPopularComponent } from './components/TvShow/tv-list-popular/tv-list-popular.component';
 import { TvDetailsComponent } from './components/TvShow/tv-details/tv-details.component';
 import { TvListOnAirComponent } from './components/TvShow/tv-list-on-air/tv-list-on-air.component';
+import { TvListTopRatedComponent } from './components/TvShow/tv-list-top-rated/tv-list-top-rated.component';
 
 
 
@@ -58,6 +59,7 @@ import { TvListOnAirComponent } from './components/TvShow/tv-list-on-air/tv-list
     TvListPopularComponent,
     TvDetailsComponent,
     TvListOnAirComponent,
+    TvListTopRatedComponent,
   ],
   imports: [
     CommonModule,
@@ -87,6 +89,6 @@ import { TvListOnAirComponent } from './components/TvShow/tv-list-on-air/tv-list
   providers: [],
   entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent, TvListTopRatedComponent]
 })
 export class AppModule { }
