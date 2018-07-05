@@ -9,6 +9,7 @@ import {MovieListNowPlayingComponent} from './components/Movie/movie-list-now-pl
 import {MovieListUpcomingComponent} from './components/Movie/movie-list-upcoming/movie-list-upcoming.component';
 import {SearchComponent} from './components/search/search.component';
 import {TvListPopularComponent} from './components/TvShow/tv-list-popular/tv-list-popular.component';
+import {TvDetailsComponent} from './components/TvShow/tv-details/tv-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/list-movies/popular/1', pathMatch: 'full' },
@@ -16,9 +17,10 @@ const routes: Routes = [
   { path: 'list-movies/top_rated/:page', component: MovieListTopRatedComponent },
   { path: 'list-movies/now_playing/:page', component: MovieListNowPlayingComponent },
   { path: 'list-movies/upcoming/:page', component: MovieListUpcomingComponent },
+  { path: 'movie/:id', component: MovieDetailsComponent },
   { path: 'tv/popular/:page', component: TvListPopularComponent },
   { path: 'people/popular/:page', component: ListPopularPeopleComponent },
-  { path: 'movie/:id', component: MovieDetailsComponent },
+  { path: 'tv/:id', component: TvDetailsComponent },
   { path: 'person/:id', component: PersonDetailComponent },
   { path: 'search/:query/:page', component: SearchComponent },
 ];

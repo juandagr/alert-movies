@@ -64,8 +64,8 @@
           <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.runtime">
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>access_time</mat-icon>
-              <div fxLayout="column" fxLayoutAlign="start center" >
-                <p>Runtime<br/>{{convertTime(movie.runtime)}}</p>
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Runtime<br/><b>{{convertTime(movie.runtime)}}</b></p>
               </div>
             </div>
           </div>
@@ -73,8 +73,8 @@
           <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.revenue > 0">
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>attach_money</mat-icon>
-              <div fxLayout="column" fxLayoutAlign="start center" >
-                <p>Revenue<br/>{{movie.revenue| currency}}</p>
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Revenue<br/><b>{{movie.revenue| currency}}</b></p>
               </div>
             </div>
           </div>
@@ -82,8 +82,8 @@
           <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.budget > 0">
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>money_off</mat-icon>
-              <div fxLayout="column" fxLayoutAlign="start center" >
-                <p>Budget<br/>{{movie.budget| currency}}</p>
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Budget<br/><b>{{movie.budget| currency}}</b></p>
               </div>
             </div>
           </div>

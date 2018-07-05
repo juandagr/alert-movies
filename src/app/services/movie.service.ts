@@ -151,8 +151,6 @@ export class MovieService {
               homepage: data.homepage,
               original_language: data.original_language,
               production_companies: data.production_companies
-
-
             };
           }
         ));

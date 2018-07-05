@@ -40,4 +40,40 @@ export class TvShowService {
           }
         ));
   }
+
+  getTvDetails(id: number): Observable<any> {
+    const append = '&append_to_response=credits,images,similar,videos';
+    const url = (this.apiUrl + '/tv/' + id + '?api_key=' + this.apiKey  + append);
+    return this.http
+      .get(url)
+      .pipe(
+        map(
+          (data: any) => {
+            console.log(data, 'totaldata');
+            return {
+              id: data.id,
+              name: data.name,
+              vote_average: data.vote_average,
+              poster_path : data.poster_path,
+              overview: data.overview,
+              genres: data.genres,
+              similar: data.similar,
+              credits: data.credits,
+              videos: data.videos,
+              images: data.images,
+              backdrop_path: data.backdrop_path,
+              homepage: data.homepage,
+              original_language: data.original_language,
+              production_companies: data.production_companies,
+              episode_run_time: data.episode_run_time,
+              first_air_date: data.first_air_date,
+              created_by: data.created_by,
+              number_of_episodes: data.number_of_episodes,
+              number_of_seasons: data.number_of_seasons,
+              seasons: data.seasons,
+              networks: data.networks
+            };
+          }
+        ));
+  }
 }
