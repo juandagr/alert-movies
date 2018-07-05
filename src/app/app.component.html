@@ -30,14 +30,19 @@
       </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav logo="assets:tmdb" toolbarTitle="Alert Movies" navigationRoute="/">
-      <button mat-icon-button td-menu-button tdLayoutToggle>
-        <mat-icon>menu</mat-icon>
-      </button>
+      <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <button mat-icon-button td-menu-button tdLayoutToggle>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-icon [routerLink]="['/']" class="mat-icon-logo cursor-pointer" logo="assets:tmdb"></mat-icon>
+        <span flex></span>
+        <td-search-box style="margin-bottom: 38px; width: 380px; margin-left: 800px" #searchBar class="search-bar tc-grey-50" backIcon="arrow_forward"
+                       placeholder="Search movies, tv series or persons"
+                       [showUnderline]="true" [debounce]="300" [alwaysVisible]="true"
+                       (search)="handleSearch()" >
+        </td-search-box>
 
-      <td-search-box backIcon="arrow_back" placeholder="Search here" [showUnderline]="true"
-                     [debounce]="1000" [alwaysVisible]="false"
-                     (search)="handleSearch($event)" (clear)="searchInputTerm = ''">
-      </td-search-box>
+      </div>
       <div class="bgc-grey-300">
         <router-outlet></router-outlet>
       </div>
