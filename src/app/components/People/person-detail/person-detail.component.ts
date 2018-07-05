@@ -13,6 +13,7 @@ export class PersonDetailComponent implements OnInit {
   person: any;
   tvCrew = [];
   movieCrew = [];
+  gender: string;
   id: number;
   tabIndex = 0;
   position = 'right';
@@ -29,7 +30,6 @@ export class PersonDetailComponent implements OnInit {
   ngOnInit() {
     this.getPersonDetails();
     this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
-
   }
 
   getPersonDetails() {
@@ -38,14 +38,17 @@ export class PersonDetailComponent implements OnInit {
       this.peopleService.getPersonDetails(idPerson).subscribe(
         (data: any) => {
           this.person = data;
+          if (this.person.gender === 2) {
+            this.gender = 'Male';
+          } else {
+            this.gender = 'Female';
+          }
           console.log(this.person);
           for (let crew of this.person.combined_credits.crew) {
             if (crew.media_type === 'tv'){
               this.tvCrew.push(crew);
-              console.log(crew.media_type);
             } else {
               this.movieCrew.push(crew);
-              console.log(crew.media_type);
             }
           }
         },
@@ -71,6 +74,18 @@ export class PersonDetailComponent implements OnInit {
       this.breakpoint = 3;
     } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
       this.breakpoint = 4;
+    }
+  }
+
+  // gets the age of person according to their birthday
+  getAge(dateString: string): number {
+    const date1 = Date.parse(dateString);
+    const date2 = Date.now();
+    const millis = date2 - date1;
+    if (millis > 0) {
+      return Math.trunc(millis / (1000 * 60 * 60 * 24 * 365));
+    } else {
+      return 0;
     }
   }
 }

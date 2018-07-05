@@ -53,7 +53,7 @@ export class PeopleService {
       .pipe(
         map(
           (data: any) => {
-            console.log(data);
+            console.log(data, "totaldata");
             return {
               profile_path : data.profile_path,
               name: data.name,

@@ -23,27 +23,22 @@
       <div class="details"  fxLayout="column" >
 
         <!-- Movie Title -->
-        <div fxLayout="row" fxLayoutAlign="start center" >
-          <!--<div fxLayout="column" fxLayoutAlign="end center" class="single_icon">-->
-            <!--<mat-icon >event</mat-icon>-->
-            <!--<p>{{movie.release_date | date}}</p>-->
-          <!--</div>-->
-
+        <div fxLayout="row" fxLayoutAlign="space-between end" >
           <div fxLayout="column" fxLayoutAlign="start center">
             <span>
-            <h1  class="movieTitle" >{{person.name}}</h1>
-          </span>
-            <!--<mat-chip-list *ngIf="movie.genres" >-->
-              <!--<mat-chip color="whitesmoke" *ngFor="let genre of movie.genres" style="font-size: 12px; height: 20px; width: auto; margin-bottom: 15px">-->
-                <!--{{genre.name}}-->
-              <!--</mat-chip>-->
-            <!--</mat-chip-list>-->
+              <h1  class="movieTitle" >{{person.name}}</h1>
+            </span>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-around center" matTooltip="Popularity" >
+            <h1>{{person.popularity | number:'1.0-0'}}</h1>
+            <mat-icon>thumb_up_alt</mat-icon>
           </div>
         </div>
 
         <mat-divider class="md-divider"></mat-divider>
 
-        <!-- Movie overview -->
+        <!-- person biography -->
         <div >
         <span>
           <p>{{person.biography}}</p>
@@ -53,38 +48,52 @@
         <mat-divider class="md-divider"></mat-divider>
 
         <!-- Movie details -->
-        <!--<div fxLayout="row" fxLayoutAlign="space-around center" >-->
-          <!--<div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.runtime">-->
-            <!--<div fxLayout="row" fxLayoutAlign="space-around center" >-->
-              <!--<mat-icon>access_time</mat-icon>-->
-              <!--<div fxLayout="column" fxLayoutAlign="start center" >-->
-                <!--<p>Runtime<br/>{{convertTime(movie.runtime)}}</p>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center" >
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="gender">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
 
-          <!--<div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.revenue > 0">-->
-            <!--<div fxLayout="row" fxLayoutAlign="space-around center" >-->
-              <!--<mat-icon>attach_money</mat-icon>-->
-              <!--<div fxLayout="column" fxLayoutAlign="start center" >-->
-                <!--<p>Revenue<br/>{{movie.revenue| currency}}</p>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
+              <i *ngIf="gender === 'Male'" aria-hidden="true" class="fa fa-mars" style="font-size:30px;"></i>
+              <i *ngIf="gender === 'Female'" aria-hidden="true" class="fa fa-venus" style="font-size:30px;"></i>
+              <i *ngIf="gender !== 'Female' && gender !== 'Male'" aria-hidden="true"
+                 class="fa fa-venus-mars" style="font-size:30px;"></i>
 
-          <!--<div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="movie.budget > 0">-->
-            <!--<div fxLayout="row" fxLayoutAlign="space-around center" >-->
-              <!--<mat-icon>money_off</mat-icon>-->
-              <!--<div fxLayout="column" fxLayoutAlign="start center" >-->
-                <!--<p>Budget<br/>{{movie.budget| currency}}</p>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Gender<br/><b>{{gender}}</b></p>
+              </div>
+            </div>
+          </div>
 
-        <!--<mat-divider class="md-divider"></mat-divider>-->
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="person.birthday">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+              <i class="fa fa-birthday-cake" style="font-size:30px;"></i>
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Birthday<br/><b>{{(person.birthday | date) +' ('+getAge(person.birthday)+')'}}</b></p>
+              </div>
+            </div>
+          </div>
 
-        <!--&lt;!&ndash; Movie companies &ndash;&gt;-->
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="person.place_of_birth">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+              <i class="fa fa-map-marker" style="font-size:30px;"></i>
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Place of birth<br/><b>{{person.place_of_birth}}</b></p>
+              </div>
+            </div>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="person.homepage">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+              <i class="fa fa-paper-plane" style="font-size:30px;"></i>
+              <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
+                <p>Homepage<br/><b>{{person.homepage}}</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <mat-divider class="md-divider"></mat-divider>
+
+        <!-- Movie companies -->
         <!--<div fxLayout="row wrap" fxLayoutAlign="space-around center" *ngIf="movie.production_companies"  >-->
           <!--<div fxLayout="column" fxLayoutAlign="space-around center" *ngFor="let companie of movie.production_companies">-->
             <!--<div *ngIf="companie.logo_path">-->

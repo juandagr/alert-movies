@@ -110,7 +110,8 @@
   <mat-tab label="Images" *ngIf="movie.images">
     <div *ngIf="movie.images.backdrops.length > 0; then backdropsTrue else elseBlock"></div>
     <ng-template #backdropsTrue>
-      <h1>Backdrops</h1>
+      <mat-toolbar class="toolbar" color="primary">Backdrops</mat-toolbar>
+
       <mat-grid-list layout="row" [cols]="breakpointBackdrops" (window:resize)="onResize($event)" rowHeight="4:2" gutterSize="5px" >
         <mat-grid-tile *ngFor="let backdrop of movie.images.backdrops | slice:0:15; let i = index" [colspan]="1" [rowspan]="1">
 
@@ -129,7 +130,7 @@
 
     <div *ngIf="movie.images.posters.length > 0; then postersTrue else elseBlock"></div>
     <ng-template #postersTrue>
-      <h1>Posters</h1>
+      <mat-toolbar class="toolbar" color="primary">Posters</mat-toolbar>
       <mat-grid-list layout="row" [cols]="breakpointPosters" (window:resize)="onResize($event)" rowHeight="3:4" gutterSize="5px" >
         <mat-grid-tile *ngFor="let poster of movie.images.posters | slice:0:12; let i = index" [colspan]="1" [rowspan]="1">
 
