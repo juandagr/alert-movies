@@ -43,7 +43,7 @@ export class PersonDetailComponent implements OnInit {
           } else {
             this.gender = 'Female';
           }
-          console.log(this.person);
+
           for (let crew of this.person.combined_credits.crew) {
             if (crew.media_type === 'tv'){
               this.tvCrew.push(crew);
@@ -64,6 +64,10 @@ export class PersonDetailComponent implements OnInit {
     this.tabIndex = 0;
   }
 
+  /**
+   * Methods for manage the behavior of the screen
+   * @param event: Event of change the page size
+   */
   onResize(event) {
     // rules for posters
     if ((event.target.innerWidth <= 400) && (event.target.innerWidth > 0)) {

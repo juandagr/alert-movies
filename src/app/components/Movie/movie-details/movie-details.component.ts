@@ -78,6 +78,10 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Methods for manage the behavior of the screen
+   * @param event: Event of change the page size
+   */
   onResize(event) {
     // rules for posters
     if ((event.target.innerWidth <= 400) && (event.target.innerWidth > 0)) {

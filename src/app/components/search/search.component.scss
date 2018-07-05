@@ -1,0 +1,53 @@
+.movie {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .movie {
+  opacity: 0.15;
+  grayscale: 10%;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: darkred;
+  font-size: 1.15vw;
+}
+
+.person_card img{
+  cursor: pointer;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.person_card img:hover{
+  width: 130%;
+  height: 130%;
+}
+
+.title_list {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: xx-large;
+  margin-left: 10px
+}
