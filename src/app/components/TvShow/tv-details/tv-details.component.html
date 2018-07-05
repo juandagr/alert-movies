@@ -168,71 +168,71 @@
 
   <!--  Tab to show the cast of the movie -->
   <mat-tab label="Cast" *ngIf="tvShow.credits.cast.length > 0">
-    <!--<div *ngIf="movie.credits.cast.length > 0; then castTrue else elseBlock"></div>-->
-    <!--<ng-template #castTrue>-->
-      <!--<mat-grid-list layout="row" [cols]="breakpointPeople" rowHeight="2:2.6" gutterSize="5px" >-->
-        <!--<mat-grid-tile *ngFor="let person of movie.credits.cast; let i = index" [colspan]="1" [rowspan]="1">-->
+    <div *ngIf="tvShow.credits.cast.length > 0; then castTrue else elseBlock"></div>
+    <ng-template #castTrue>
+      <mat-grid-list layout="row" [cols]="breakpointPeople" rowHeight="2:2.6" gutterSize="5px" >
+        <mat-grid-tile *ngFor="let person of tvShow.credits.cast; let i = index" [colspan]="1" [rowspan]="1">
 
-          <!--<mat-card class="person_card" [routerLink]="['/person', person.id]">-->
+          <mat-card class="person_card" [routerLink]="['/person', person.id]">
 
-            <!--&lt;!&ndash; Profile Image &ndash;&gt;-->
-            <!--<div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>-->
+            <!-- Profile Image -->
+            <div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>
 
-            <!--<ng-template #trueProfileImg>-->
-              <!--<img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">-->
-            <!--</ng-template>-->
+            <ng-template #trueProfileImg>
+              <img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">
+            </ng-template>
 
-            <!--<ng-template #falseProfileImg>-->
-              <!--<img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">-->
-            <!--</ng-template>-->
-
-
-          <!--</mat-card>-->
+            <ng-template #falseProfileImg>
+              <img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">
+            </ng-template>
 
 
-          <!--<mat-grid-tile-footer>{{person.name}} as {{person.character}}</mat-grid-tile-footer>-->
-        <!--</mat-grid-tile>-->
-      <!--</mat-grid-list>-->
-    <!--</ng-template>-->
+          </mat-card>
 
-    <!--<ng-template #elseBlock>-->
-    <!--</ng-template>-->
+
+          <mat-grid-tile-footer>{{person.name}} as {{person.character}}</mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+
+    <ng-template #elseBlock>
+    </ng-template>
   </mat-tab>
 
   <!--  Tab to show the crew of the movie -->
   <mat-tab label="Crew" *ngIf="tvShow.credits.crew.length > 0">
-    <!--<div *ngIf="movie.credits.crew.length > 0; then crewtTrue else elseBlock"></div>-->
-    <!--<ng-template #crewtTrue>-->
-      <!--<mat-grid-list layout="row" [cols]="breakpointPeople" rowHeight="2:2.6" gutterSize="5px" >-->
-        <!--<mat-grid-tile *ngFor="let person of movie.credits.crew; let i = index" [colspan]="1" [rowspan]="1">-->
+    <div *ngIf="tvShow.credits.crew.length > 0; then crewtTrue else elseBlock"></div>
+    <ng-template #crewtTrue>
+      <mat-grid-list layout="row" [cols]="breakpointPeople" rowHeight="2:2.6" gutterSize="5px" >
+        <mat-grid-tile *ngFor="let person of tvShow.credits.crew; let i = index" [colspan]="1" [rowspan]="1">
 
-          <!--<mat-card class="person_card" [routerLink]="['/person', person.id]">-->
+          <mat-card class="person_card" [routerLink]="['/person', person.id]">
 
-            <!--&lt;!&ndash; Profile Image &ndash;&gt;-->
-            <!--<div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>-->
+            <!-- Profile Image -->
+            <div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>
 
-            <!--<ng-template #trueProfileImg>-->
-              <!--<img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">-->
-            <!--</ng-template>-->
+            <ng-template #trueProfileImg>
+              <img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">
+            </ng-template>
 
-            <!--<ng-template #falseProfileImg>-->
-              <!--<img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">-->
-            <!--</ng-template>-->
-
-
-          <!--</mat-card>-->
+            <ng-template #falseProfileImg>
+              <img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">
+            </ng-template>
 
 
-          <!--<mat-grid-tile-footer>-->
-            <!--{{person.name}}<br>-->
-            <!--{{person.department}}-->
-          <!--</mat-grid-tile-footer>-->
-        <!--</mat-grid-tile>-->
-      <!--</mat-grid-list>-->
-    <!--</ng-template>-->
+          </mat-card>
 
-    <!--<ng-template #elseBlock>-->
-    <!--</ng-template>-->
+
+          <mat-grid-tile-footer>
+            {{person.name}}<br>
+            {{person.department}}
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+
+    <ng-template #elseBlock>
+    </ng-template>
   </mat-tab>
 
   <!--  Tab to show the movies similar to this-->
