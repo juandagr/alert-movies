@@ -1,6 +1,6 @@
 <mat-tab-group [(selectedIndex)]='tabIndex' class="detailTab" *ngIf="tvShow">
 
-  <!--  Tab to show the general details of the movie -->
+  <!--  Tab to show the general details of the tv show -->
   <mat-tab label="General">
     <div class="bg-image" *ngIf="image"
          [ngStyle]="{'background-image': 'url(' + image + ')'}">
@@ -8,7 +8,7 @@
     <div fxLayout="row" fxLayoutAlign="center center" class="cont">
       <div class="image_content">
 
-        <!-- movie poster image -->
+        <!-- tv show poster image -->
         <div *ngIf="tvShow.poster_path; then poster else noPoster"></div>
 
         <ng-template #poster>
@@ -23,7 +23,7 @@
 
       <div class="details"  fxLayout="column" >
 
-        <!-- Movie Title -->
+        <!-- tv show Name -->
         <div fxLayout="row" fxLayoutAlign="start center" >
           <div fxLayout="column" fxLayoutAlign="end center" class="single_icon">
             <mat-icon >event</mat-icon>
@@ -50,7 +50,7 @@
 
         <mat-divider class="md-divider"></mat-divider>
 
-        <!-- Movie overview -->
+        <!-- tv show overview -->
         <div >
         <span>
           <p>{{tvShow.overview}}</p>
@@ -110,7 +110,7 @@
 
         <mat-divider class="md-divider"></mat-divider>
 
-        <!-- Movie companies -->
+        <!-- tv show companies -->
         <div fxLayout="row wrap" fxLayoutAlign="space-around center" *ngIf="tvShow.production_companies"  >
           <div fxLayout="column" fxLayoutAlign="space-around center" *ngFor="let companie of tvShow.production_companies">
             <div *ngIf="companie.logo_path">
@@ -125,7 +125,48 @@
 
   </mat-tab>
 
-  <!--  Tab to show the Images of the movie -->
+  <!--  Tab to show the seasons of the tv show -->
+  <mat-tab label="Seasons" *ngIf="tvShow.seasons">
+    <mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
+      <!--<mat-grid-list cols="4" gutterSize="5px" rowHeight="3:4" >-->
+      <mat-grid-tile *ngFor="let season of tvShow.seasons" [colspan]="1" [rowspan]="1">
+        <div class="container">
+          <mat-card class="movie" matTooltip="{{season.overview}}">
+
+            <!-- Poster Image -->
+            <div *ngIf="season.poster_path; then truePoster else falsePoster"></div>
+
+            <ng-template #truePoster>
+              <img mat-card-image src="{{url_image_poster}}{{season.poster_path}}">
+            </ng-template>
+
+            <ng-template #falsePoster>
+              <img mat-card-image  src="assets/no-poster.jpg">
+            </ng-template>
+
+
+          </mat-card>
+          <div class="middle">
+            <div class="text">
+
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <h2>{{season.name}}</h2>
+                <h3>Air date: {{season.air_date | date}}</h3>
+                <h3>Episodes: {{season.episode_count}}</h3>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <mat-grid-tile-footer>{{season.name}}</mat-grid-tile-footer>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </mat-tab>
+
+  <!--  Tab to show the Images of the tv show -->
   <mat-tab label="Images" *ngIf="tvShow.images">
     <div *ngIf="tvShow.images.backdrops.length > 0; then backdropsTrue else elseBlock"></div>
     <ng-template #backdropsTrue>
@@ -166,7 +207,7 @@
 
   </mat-tab>
 
-  <!--  Tab to show the cast of the movie -->
+  <!--  Tab to show the cast of the tv show -->
   <mat-tab label="Cast" *ngIf="tvShow.credits.cast.length > 0">
     <div *ngIf="tvShow.credits.cast.length > 0; then castTrue else elseBlock"></div>
     <ng-template #castTrue>
@@ -199,7 +240,7 @@
     </ng-template>
   </mat-tab>
 
-  <!--  Tab to show the crew of the movie -->
+  <!--  Tab to show the crew of the tv show -->
   <mat-tab label="Crew" *ngIf="tvShow.credits.crew.length > 0">
     <div *ngIf="tvShow.credits.crew.length > 0; then crewtTrue else elseBlock"></div>
     <ng-template #crewtTrue>
@@ -235,47 +276,45 @@
     </ng-template>
   </mat-tab>
 
-  <!--  Tab to show the movies similar to this-->
-  <mat-tab label="Similar" *ngIf="tvShow.similar.results > 0">
-    <!--<mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">-->
-      <!--<mat-grid-tile *ngFor="let movieSimilar of movie.similar.results" [colspan]="1" [rowspan]="1">-->
-        <!--<div class="container">-->
-          <!--<mat-card class="movie" >-->
+  <!--  Tab to show the tv shows similar to this-->
+  <mat-tab label="Similar" *ngIf="tvShow.similar.results">
+    <mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
+      <mat-grid-tile *ngFor="let tvSimilar of tvShow.similar.results" [colspan]="1" [rowspan]="1">
+        <div class="container">
+          <mat-card class="movie" >
 
-            <!--&lt;!&ndash; Poster Image &ndash;&gt;-->
-            <!--<div *ngIf="movieSimilar.poster_path; then truePoster else falsePoster"></div>-->
+            <!-- Poster Image -->
+            <div *ngIf="tvSimilar.poster_path; then truePoster else falsePoster"></div>
 
-            <!--<ng-template #truePoster>-->
-              <!--<img mat-card-image src="{{url_image_poster}}{{movieSimilar.poster_path}}">-->
-            <!--</ng-template>-->
+            <ng-template #truePoster>
+              <img mat-card-image src="{{url_image_poster}}{{tvSimilar.poster_path}}">
+            </ng-template>
 
-            <!--<ng-template #falsePoster>-->
-              <!--<img mat-card-image  src="assets/no-poster.jpg">-->
-            <!--</ng-template>-->
-
-
-          <!--</mat-card>-->
-          <!--<div class="middle">-->
-            <!--<div class="text">-->
-
-              <!--<div fxLayout="column" fxLayoutAlign="center" >-->
-                <!--<h2>{{movieSimilar.title}}</h2>-->
-                <!--<div fxLayout="row" fxLayoutAlign="space-around center" >-->
-                  <!--<h3 style="margin: auto">{{movieSimilar.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>-->
-                <!--</div>-->
-                <!--<p><b>{{ (movieSimilar.overview.length > 150) ? (movieSimilar.overview | slice:0:150) + '....' : (movieSimilar.overview) }}</b></p>-->
-                <!--<button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', movieSimilar.id]" (click)="changeTab()"> Details </button>-->
-              <!--</div>-->
+            <ng-template #falsePoster>
+              <img mat-card-image  src="assets/no-poster.jpg">
+            </ng-template>
 
 
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<mat-grid-tile-footer>{{movieSimilar.title}}</mat-grid-tile-footer>-->
-      <!--</mat-grid-tile>-->
-    <!--</mat-grid-list>-->
+          </mat-card>
+          <div class="middle">
+            <div class="text">
+
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <h2>{{tvSimilar.name}}</h2>
+                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                  <h3 style="margin: auto">{{tvSimilar.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+                </div>
+                <p><b>{{ (tvSimilar.overview.length > 150) ? (tvSimilar.overview | slice:0:150) + '....' : (tvSimilar.overview) }}</b></p>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/tv', tvSimilar.id]" (click)="changeTab()"> Details </button>
+              </div>
 
 
+            </div>
+          </div>
+        </div>
+        <mat-grid-tile-footer>{{tvSimilar.name}}</mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
   </mat-tab>
 
 
