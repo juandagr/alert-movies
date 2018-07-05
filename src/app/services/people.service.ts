@@ -46,7 +46,7 @@ export class PeopleService {
    * @returns {Observable<any>}
    */
   getPersonDetails(id: number): Observable<any> {
-    const append = '&append_to_response=movie_credits,tv_credits';
+    const append = '&append_to_response=movie_credits,tv_credits,combined_credits';
     const url = (this.apiUrl + '/person/' + id + '?api_key=' + this.apiKey  + append);
     return this.http
       .get(url)
@@ -63,7 +63,8 @@ export class PeopleService {
               gender: data.gender,
               movie_credits: data.movie_credits,
               place_of_birth: data.place_of_birth,
-              tv_credits: data.tv_credits
+              tv_credits: data.tv_credits,
+              combined_credits: data.combined_credits
             };
           }
         ));

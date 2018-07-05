@@ -11,6 +11,8 @@ export class PersonDetailComponent implements OnInit {
 
   // Attributes
   person: any;
+  tvCrew = [];
+  movieCrew = [];
   id: number;
   tabIndex = 0;
   position = 'right';
@@ -27,6 +29,7 @@ export class PersonDetailComponent implements OnInit {
   ngOnInit() {
     this.getPersonDetails();
     this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
+
   }
 
   getPersonDetails() {
@@ -36,6 +39,15 @@ export class PersonDetailComponent implements OnInit {
         (data: any) => {
           this.person = data;
           console.log(this.person);
+          for (let crew of this.person.combined_credits.crew) {
+            if (crew.media_type === 'tv'){
+              this.tvCrew.push(crew);
+              console.log(crew.media_type);
+            } else {
+              this.movieCrew.push(crew);
+              console.log(crew.media_type);
+            }
+          }
         },
         (error: any) => {
           console.log(error);

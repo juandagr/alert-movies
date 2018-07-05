@@ -11,7 +11,7 @@ import {
   MatListModule,
   MatTabsModule,
   MatDialogModule,
-  MatTooltipModule
+  MatTooltipModule, MatToolbarModule
 } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
@@ -65,6 +65,7 @@ import { PersonDetailComponent } from './components/People/person-detail/person-
     MatDividerModule,
     MatDialogModule,
     MatTooltipModule,
+    MatToolbarModule,
     CovalentLayoutModule,
     CovalentStepsModule,
     CovalentPagingModule

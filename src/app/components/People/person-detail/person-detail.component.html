@@ -102,7 +102,7 @@
   <!--  Tab to show the movies where the person participated -->
   <mat-tab label="Movies" *ngIf="person.movie_credits.cast">
     <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
-      <mat-grid-tile *ngFor="let movieCast of person.movie_credits.cast" [colspan]="1" [rowspan]="1">
+      <mat-grid-tile *ngFor="let movieCast of person.movie_credits.cast | slice:0:16" [colspan]="1" [rowspan]="1">
         <div class="container">
           <mat-card class="movie" >
 
@@ -143,7 +143,7 @@
   <!--  Tab to show the tv series where the person participated -->
   <mat-tab label="Tv shows" *ngIf="person.tv_credits.cast">
     <mat-grid-list  [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
-      <mat-grid-tile *ngFor="let tvCast of person.tv_credits.cast" [colspan]="1" [rowspan]="1">
+      <mat-grid-tile *ngFor="let tvCast of person.tv_credits.cast | slice:0:16" [colspan]="1" [rowspan]="1">
         <div class="container">
           <mat-card class="movie" >
 
@@ -177,6 +177,92 @@
           </div>
         </div>
         <mat-grid-tile-footer>{{tvCast.name}} <br> as {{tvCast.character}}</mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+
+  <!--  Tab to show the crew where the person participated -->
+  <mat-tab label="Crew" *ngIf="person.combined_credits">
+
+    <!-- movie crew -->
+    <mat-toolbar class="toolbar" color="primary" *ngIf="tvCrew.length > 0">Movie crew</mat-toolbar>
+    <mat-grid-list  *ngIf="tvCrew.length > 0" [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
+      <mat-grid-tile *ngFor="let crew of movieCrew | slice:0:12 " [colspan]="1" [rowspan]="1">
+        <div class="container">
+          <mat-card  class="movie" >
+
+            <!-- Poster Image -->
+            <div *ngIf="crew.poster_path; then truePoster else falsePoster"></div>
+
+            <ng-template #truePoster>
+              <img mat-card-image src="{{url_image_profile}}{{crew.poster_path}}">
+            </ng-template>
+
+            <ng-template #falsePoster>
+              <img mat-card-image  src="assets/no-poster.jpg">
+            </ng-template>
+
+
+          </mat-card>
+          <div class="middle">
+            <div class="text">
+
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <h2>{{crew.title}}</h2>
+                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                  <h3 style="margin: auto">{{crew.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+                </div>
+                <p><b>{{ (crew.overview.length > 150) ? (crew.overview | slice:0:150) + '....' : (crew.overview) }}</b></p>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', crew.id]" (click)="changeTab()"> Details </button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <mat-grid-tile-footer>{{crew.title}} <br> as {{crew.job}}</mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-divider *ngIf="tvCrew.length > 0"  style="margin-top: 30px; border-width: 5px"></mat-divider>
+
+    <!-- tv crew -->
+    <mat-toolbar class="toolbar" color="primary" *ngIf="tvCrew.length > 0">Tv crew</mat-toolbar>
+    <mat-grid-list  *ngIf="tvCrew.length > 0" [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
+      <mat-grid-tile *ngFor="let crew of tvCrew | slice:0:12" [colspan]="1" [rowspan]="1">
+        <div class="container">
+          <mat-card  class="movie" >
+
+            <!-- Poster Image -->
+            <div *ngIf="crew.poster_path; then truePoster else falsePoster"></div>
+
+            <ng-template #truePoster>
+              <img mat-card-image src="{{url_image_profile}}{{crew.poster_path}}">
+            </ng-template>
+
+            <ng-template #falsePoster>
+              <img mat-card-image  src="assets/no-poster.jpg">
+            </ng-template>
+
+
+          </mat-card>
+          <div class="middle">
+            <div class="text">
+
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <h2>{{crew.name}}</h2>
+                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                  <h3 style="margin: auto">{{crew.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+                </div>
+                <p><b>{{ (crew.overview.length > 150) ? (crew.overview | slice:0:150) + '....' : (crew.overview) }}</b></p>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', crew.id]" (click)="changeTab()"> Details </button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <mat-grid-tile-footer>{{crew.name}} <br> as {{crew.job}}</mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>

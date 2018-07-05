@@ -28,6 +28,7 @@ export class MovieDetailsComponent implements OnInit {
   // used for responsive
   breakpointBackdrops;
   breakpointPosters;
+  breakpointPeople;
 
 
   constructor(
@@ -40,6 +41,7 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit() {
     this.breakpointBackdrops = (window.innerHeight <= 400) ? 1 : 3;
     this.breakpointPosters = (window.innerHeight <= 400) ? 1 : 4;
+    this.breakpointPeople = (window.innerHeight <= 400) ? 1 : 5;
     this.getMovieDetails();
   }
 
@@ -99,6 +101,18 @@ export class MovieDetailsComponent implements OnInit {
       this.breakpointBackdrops = 3;
     }
 
+    // rules for people
+    if ((event.target.innerWidth <= 360) && (event.target.innerWidth > 0)) {
+      this.breakpointPeople = 1;
+    } else if ((event.target.innerWidth <= 560) && (event.target.innerWidth > 360)) {
+      this.breakpointPeople = 2;
+    } else if ((event.target.innerWidth <= 840) && (event.target.innerWidth > 560)) {
+      this.breakpointPeople = 3;
+    } else if ((event.target.innerWidth <= 1200) && (event.target.innerWidth > 840)) {
+      this.breakpointPeople = 4;
+    } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
+      this.breakpointPeople = 5;
+    }
   }
 
   // Function to change the tab

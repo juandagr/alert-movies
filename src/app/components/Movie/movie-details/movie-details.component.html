@@ -149,28 +149,24 @@
   <mat-tab label="Cast" *ngIf="movie.credits.cast.length > 0">
     <div *ngIf="movie.credits.cast.length > 0; then castTrue else elseBlock"></div>
     <ng-template #castTrue>
-      <mat-grid-list layout="row" cols="5" rowHeight="2:2.6" gutterSize="5px" >
+      <mat-grid-list layout="row" [cols]="breakpointPeople" rowHeight="2:2.6" gutterSize="5px" >
         <mat-grid-tile *ngFor="let person of movie.credits.cast; let i = index" [colspan]="1" [rowspan]="1">
 
-          <!-- Profile image of person -->
-          <div *ngIf="person.profile_path; then trueCast else falseCast"></div>
+          <mat-card class="person_card" [routerLink]="['/person', person.id]">
 
-          <ng-template #trueCast>
-            <mat-card class="movie">
-              <img mat-card-image
-                   src="{{url_image_poster}}{{person.profile_path}}"
-                   alt="{{person.name}} profile image">
-            </mat-card>
-          </ng-template>
+            <!-- Profile Image -->
+            <div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>
 
-          <!-- If the image isn't present in the API, then a local image is used-->
-          <ng-template #falseCast>
-            <mat-card class="movie">
-              <img mat-card-image
-                   src="assets/Unknown-character-profile.png"
-                   alt="{{person.name}} profile image">
-            </mat-card>
-          </ng-template>
+            <ng-template #trueProfileImg>
+              <img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">
+            </ng-template>
+
+            <ng-template #falseProfileImg>
+              <img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">
+            </ng-template>
+
+
+          </mat-card>
 
 
           <mat-grid-tile-footer>{{person.name}} as {{person.character}}</mat-grid-tile-footer>
@@ -186,28 +182,24 @@
   <mat-tab label="Crew" *ngIf="movie.credits.crew.length > 0">
     <div *ngIf="movie.credits.crew.length > 0; then crewtTrue else elseBlock"></div>
     <ng-template #crewtTrue>
-      <mat-grid-list layout="row" cols="5" rowHeight="2:2.6" gutterSize="5px" >
+      <mat-grid-list layout="row" [cols]="breakpointPeople" rowHeight="2:2.6" gutterSize="5px" >
         <mat-grid-tile *ngFor="let person of movie.credits.crew; let i = index" [colspan]="1" [rowspan]="1">
 
-          <!-- Profile image of person -->
-          <div *ngIf="person.profile_path; then trueCast else falseCast"></div>
+          <mat-card class="person_card" [routerLink]="['/person', person.id]">
 
-          <ng-template #trueCast>
-            <mat-card class="movie">
-              <img mat-card-image
-                   src="{{url_image_poster}}{{person.profile_path}}"
-                   alt="{{person.name}} profile image">
-            </mat-card>
-          </ng-template>
+            <!-- Profile Image -->
+            <div *ngIf="person.profile_path; then trueProfileImg else falseProfileImg"></div>
 
-          <!-- If the image isn't present in the API, then a local image is used-->
-          <ng-template #falseCast>
-            <mat-card class="movie">
-              <img mat-card-image
-                   src="assets/Unknown-character-profile.png"
-                   alt="{{person.name}} profile image">
-            </mat-card>
-          </ng-template>
+            <ng-template #trueProfileImg>
+              <img mat-card-image src="{{url_image_poster}}{{person.profile_path}}">
+            </ng-template>
+
+            <ng-template #falseProfileImg>
+              <img mat-card-image  src="assets/Unknown-character-profile.png" style="height: 380px; width: 300px">
+            </ng-template>
+
+
+          </mat-card>
 
 
           <mat-grid-tile-footer>
@@ -223,7 +215,7 @@
   </mat-tab>
 
   <!--  Tab to show the movies similar to this-->
-  <mat-tab label="Similar" *ngIf="movie.similar.total_results > 0">
+  <mat-tab label="Similar" *ngIf="movie.similar.results > 0">
       <mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
         <mat-grid-tile *ngFor="let movieSimilar of movie.similar.results" [colspan]="1" [rowspan]="1">
           <div class="container">
