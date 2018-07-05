@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {IPageChangeEvent} from '@covalent/core/paging';
 import {ActivatedRoute, Router} from '@angular/router';
+import {IPageChangeEvent} from '@covalent/core/paging';
 import {MovieService} from '../../../services/movie.service';
 
 @Component({
-  selector: 'app-movie-list-top-rated',
-  templateUrl: './movie-list-top-rated.component.html',
-  styleUrls: ['./movie-list-top-rated.component.scss']
+  selector: 'app-movie-list-now-playing',
+  templateUrl: './movie-list-now-playing.component.html',
+  styleUrls: ['./movie-list-now-playing.component.scss']
 })
-export class MovieListTopRatedComponent implements OnInit {
+export class MovieListNowPlayingComponent implements OnInit {
 
   // Attributes
   eventLinks: IPageChangeEvent;
@@ -27,8 +27,7 @@ export class MovieListTopRatedComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     public router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.currentPage = +this.route.snapshot.paramMap.get('page');
@@ -36,15 +35,20 @@ export class MovieListTopRatedComponent implements OnInit {
     this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
   }
 
+  /**
+   * manages the behavior of the pagination
+   * @param event: Event of change the page
+   */
   changePage(event: IPageChangeEvent): void {
     this.currentPage = event.page;
-    this.router.navigate(['/list-movies/top_rated', this.currentPage]);
+    this.router.navigate(['/list-movies/now_playing', this.currentPage]);
     this.getMoviesActualPage();
 
   }
 
+  // Method for get the movies with the actual page
   getMoviesActualPage() {
-    this.movieService.getTopRatedMovies(this.currentPage).subscribe(
+    this.movieService.getNowPlayingMovies(this.currentPage).subscribe(
       (data: any ) => {
         this.movies = data;
         this.totalResults = this.movies[0].total_results;
@@ -56,6 +60,10 @@ export class MovieListTopRatedComponent implements OnInit {
     );
   }
 
+  /**
+   * Methods for manage the behavior of the screen
+   * @param event: Event of change the page size
+   */
   onResize(event) {
     if ((event.target.innerWidth <= 400) && (event.target.innerWidth > 0)) {
       this.breakpoint = 1;
@@ -68,10 +76,15 @@ export class MovieListTopRatedComponent implements OnInit {
     }
   }
 
+  /**
+   * manages the pagination
+   * @param event: Event of change the page
+   */
   changeLinks(event: IPageChangeEvent): void {
     this.eventLinks = event;
     this.page = this.eventLinks.page;
-    this.router.navigate(['/list-movies/top_rated', this.page]);
+    this.router.navigate(['/list-movies/now_playing', this.page]);
     this.getMoviesActualPage();
   }
+
 }

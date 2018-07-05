@@ -5,11 +5,13 @@ import { MovieDetailsComponent } from './components/Movie/movie-details/movie-de
 import {MovieListTopRatedComponent} from './components/Movie/movie-list-top-rated/movie-list-top-rated.component';
 import {ListPopularPeopleComponent} from './components/People/list-popular-people/list-popular-people.component';
 import {PersonDetailComponent} from './components/People/person-detail/person-detail.component';
+import {MovieListNowPlayingComponent} from './components/Movie/movie-list-now-playing/movie-list-now-playing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/list-movies/popular/1', pathMatch: 'full' },
   { path: 'list-movies/popular/:page', component: MovieListComponent },
   { path: 'list-movies/top_rated/:page', component: MovieListTopRatedComponent },
+  { path: 'list-movies/now_playing/:page', component: MovieListNowPlayingComponent },
   { path: 'people/popular/:page', component: ListPopularPeopleComponent },
   { path: 'movie/:id', component: MovieDetailsComponent },
   { path: 'person/:id', component: PersonDetailComponent },
