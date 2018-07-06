@@ -13,9 +13,11 @@ import {TvDetailsComponent} from './components/TvShow/tv-details/tv-details.comp
 import {TvListOnAirComponent} from './components/TvShow/tv-list-on-air/tv-list-on-air.component';
 import {TvListTopRatedComponent} from './components/TvShow/tv-list-top-rated/tv-list-top-rated.component';
 import {TvListLatestComponent} from './components/TvShow/tv-list-latest/tv-list-latest.component';
+import {IndexComponent} from './components/index/index.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/list-movies/popular/1', pathMatch: 'full' },
+  { path: '', redirectTo: 'index', pathMatch: 'full' },
+  { path: 'index', component: IndexComponent },
   { path: 'list-movies/popular/:page', component: MovieListComponent },
   { path: 'list-movies/top_rated/:page', component: MovieListTopRatedComponent },
   { path: 'list-movies/now_playing/:page', component: MovieListNowPlayingComponent },

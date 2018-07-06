@@ -16,11 +16,6 @@
         <a mat-list-item routerLink="/list-movies/now_playing/1"><mat-icon>movie</mat-icon>Now Playing</a>
         <a mat-list-item routerLink="/list-movies/upcoming/1"><mat-icon>event</mat-icon>Upcoming</a>
       </mat-nav-list>
-      <p>People</p>
-      <mat-divider></mat-divider>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/people/popular/1"><mat-icon>person</mat-icon>Popular</a>
-      </mat-nav-list>
       <p>Tv Shows</p>
       <mat-divider></mat-divider>
       <mat-nav-list>
@@ -28,6 +23,11 @@
         <a mat-list-item routerLink="/tv/top_rated/1"><mat-icon>favorite</mat-icon>Top Rated</a>
         <a mat-list-item routerLink="/tv/on_air/1"><mat-icon>live_tv</mat-icon>On The Air</a>
         <a mat-list-item routerLink="/tv/latest/1"><mat-icon>movie</mat-icon>Airing Today</a>
+      </mat-nav-list>
+      <p>People</p>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/people/popular/1"><mat-icon>person</mat-icon>Popular</a>
       </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav  navigationRoute="/">
@@ -44,7 +44,22 @@
                        (search)="handleSearch($event)" >
         </td-search-box>
       </div>
+
       <div class="bgc-grey-300">
+        <mat-toolbar-row style="background-color: mintcream">
+          <mat-nav-list>
+            <button mat-button routerLink="/list-movies/popular/1">Popular Movies</button>
+            <button mat-button routerLink="/list-movies/top_rated/1">Top Rated Movies</button>
+            <button mat-button routerLink="/list-movies/now_playing/1">Now Playing Movies</button>
+            <button mat-button routerLink="/list-movies/upcoming/1">Upcoming Movies</button>
+            <button mat-button routerLink="/people/popular/1">People</button>
+            <button mat-button routerLink="/tv/popular/1">Popular Tv</button>
+            <button mat-button routerLink="/tv/top_rated/1">Top Rated Tv</button>
+            <button mat-button routerLink="/tv/on_air/1">Tv On Air</button>
+            <button mat-button routerLink="/tv/latest/1">Tv Airing Today</button>
+
+          </mat-nav-list>
+        </mat-toolbar-row>
         <router-outlet></router-outlet>
       </div>
     </td-layout-nav>

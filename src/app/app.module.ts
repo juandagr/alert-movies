@@ -24,6 +24,7 @@ import { CovalentPagingModule } from '@covalent/core/paging';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +43,7 @@ import { TvDetailsComponent } from './components/TvShow/tv-details/tv-details.co
 import { TvListOnAirComponent } from './components/TvShow/tv-list-on-air/tv-list-on-air.component';
 import { TvListTopRatedComponent } from './components/TvShow/tv-list-top-rated/tv-list-top-rated.component';
 import { TvListLatestComponent } from './components/TvShow/tv-list-latest/tv-list-latest.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 
@@ -62,6 +64,7 @@ import { TvListLatestComponent } from './components/TvShow/tv-list-latest/tv-lis
     TvListOnAirComponent,
     TvListTopRatedComponent,
     TvListLatestComponent,
+    IndexComponent,
   ],
   imports: [
     CommonModule,
@@ -83,14 +86,19 @@ import { TvListLatestComponent } from './components/TvShow/tv-list-latest/tv-lis
     MatDialogModule,
     MatTooltipModule,
     MatToolbarModule,
+    NgbModule.forRoot(),
     CovalentLayoutModule,
     CovalentStepsModule,
     CovalentPagingModule,
-    CovalentSearchModule
+    CovalentSearchModule,
   ],
   providers: [],
   entryComponents: [ TrailerComponent ],
   bootstrap: [AppComponent],
-  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent, ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent, MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent, TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent, TvListTopRatedComponent, TvListLatestComponent]
+  exports: [MovieListComponent, MovieDetailsComponent, MovieListTopRatedComponent,
+    ListPopularPeopleComponent, TrailerComponent, PersonDetailComponent,
+    MovieListUpcomingComponent, MovieListNowPlayingComponent, SearchComponent,
+    TvListPopularComponent, TvDetailsComponent, TvListOnAirComponent, TvListTopRatedComponent,
+    TvListLatestComponent, IndexComponent]
 })
 export class AppModule { }

@@ -35,7 +35,8 @@ export class MovieService {
                 poster_path : item.poster_path,
                 overview: item.overview,
                 total_pages: data.total_pages,
-                total_results: data.total_results
+                total_results: data.total_results,
+                backdrop_path: data.backdrop_path
               };
             });
           }

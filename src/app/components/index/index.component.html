@@ -1,0 +1,81 @@
+<!-- movie crew -->
+<mat-toolbar class="toolbar" color="primary" *ngIf="movies.length > 0">Popular Movies</mat-toolbar>
+<mat-grid-list  *ngIf="movies.length > 0" [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
+  <mat-grid-tile *ngFor="let movie of movies " [colspan]="1" [rowspan]="1">
+    <div class="container">
+      <mat-card  class="movie" >
+
+        <!-- Poster Image -->
+        <div *ngIf="movie.poster_path; then truePoster else falsePoster"></div>
+
+        <ng-template #truePoster>
+          <img mat-card-image src="{{url_image}}{{movie.poster_path}}">
+        </ng-template>
+
+        <ng-template #falsePoster>
+          <img mat-card-image  src="assets/no-poster.jpg">
+        </ng-template>
+
+
+      </mat-card>
+      <div class="middle">
+        <div class="text">
+
+          <div fxLayout="column" fxLayoutAlign="center" >
+            <h2>{{movie.title}}</h2>
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+              <h3 style="margin: auto">{{movie.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+            </div>
+            <p><b>{{ (movie.overview.length > 150) ? (movie.overview | slice:0:150) + '....' : (movie.overview) }}</b></p>
+            <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', movie.id]" (click)="changeTab()"> Details </button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <mat-grid-tile-footer>{{movie.title}}</mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-divider *ngIf="tvShows.length > 0"  style="margin-top: 30px; border-width: 5px"></mat-divider>
+
+<!-- tv crew -->
+<mat-toolbar class="toolbar" color="primary" *ngIf="tvShows.length > 0">Popular Tv Shows</mat-toolbar>
+<mat-grid-list  *ngIf="tvShows.length > 0" [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="12px" rowHeight="3:4">
+  <mat-grid-tile *ngFor="let show of tvShows" [colspan]="1" [rowspan]="1">
+    <div class="container">
+      <mat-card  class="movie" >
+
+        <!-- Poster Image -->
+        <div *ngIf="show.poster_path; then truePoster else falsePoster"></div>
+
+        <ng-template #truePoster>
+          <img mat-card-image src="{{url_image}}{{show.poster_path}}">
+        </ng-template>
+
+        <ng-template #falsePoster>
+          <img mat-card-image  src="assets/no-poster.jpg">
+        </ng-template>
+
+
+      </mat-card>
+      <div class="middle">
+        <div class="text">
+
+          <div fxLayout="column" fxLayoutAlign="center" >
+            <h2>{{show.name}}</h2>
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+              <h3 style="margin: auto">{{show.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
+            </div>
+            <p><b>{{ (show.overview.length > 150) ? (show.overview | slice:0:150) + '....' : (show.overview) }}</b></p>
+            <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/tv', show.id]" > Details </button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <mat-grid-tile-footer>{{show.name}}</mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list>

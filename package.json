@@ -28,6 +28,8 @@
     "@covalent/highlight": "^2.0.0-beta.1",
     "@covalent/http": "^2.0.0-beta.1",
     "@covalent/markdown": "^2.0.0-beta.1",
+    "@ng-bootstrap/ng-bootstrap": "^2.2.0",
+    "angular-ui-carousel": "^0.1.10",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

@@ -73,7 +73,7 @@
                   <h3 style="margin: auto">{{tv.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
                 </div>
                 <p><b>{{ (tv.overview.length > 150) ? (tv.overview | slice:0:150) + '....' : (tv.overview) }}</b></p>
-                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', tv.id]" (click)="changeTab()"> Details </button>
+                <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/tv', tv.id]" (click)="changeTab()"> Details </button>
               </div>
 
 

@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MovieListTopComponent} from '../movie-list-top/movie-list-top.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
@@ -9,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class TrailerComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<MovieListTopComponent>,
+  constructor(public dialogRef: MatDialogRef<TrailerComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
