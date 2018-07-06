@@ -54,8 +54,6 @@ export class TvDetailsComponent implements OnInit {
       this.tvShowService.getTvDetails(idTv).subscribe(
         (data: any) => {
           this.tvShow = data;
-          console.log(data, "datos traidos");
-
           if (this.tvShow.videos) {
             for (let i = 0; i < this.tvShow.videos.results.length; i++) {
               if (this.tvShow.videos.results[i].type === 'Trailer') {

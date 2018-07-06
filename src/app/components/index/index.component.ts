@@ -39,7 +39,6 @@ export class IndexComponent implements OnInit {
     this.movieService.getPopularMovies(1).subscribe(
       (data: any) => {
         this.movies = data.slice(0, 8);
-        console.log(this.movies, 'movies');
       },
       (error: any) => {
         console.log(error);
@@ -53,7 +52,6 @@ export class IndexComponent implements OnInit {
     this.tvShowService.getPopularTvShow(1).subscribe(
       (data: any) => {
         this.tvShows = data.slice(0, 8);
-        console.log(this.tvShows, 'tv');
       },
       (error: any) => {
         console.log(error);
