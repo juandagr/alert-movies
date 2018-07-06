@@ -127,12 +127,12 @@ export class MovieService {
   getMovieDetails(id: number): Observable<any> {
     const append = '&append_to_response=credits,images,similar,videos';
     const url = (this.apiUrl + '/movie/' + id + '?api_key=' + this.apiKey  + append);
-    console.log(url);
     return this.http
       .get(url)
       .pipe(
         map(
           (data: any) => {
+            console.log(data);
             return {
               id: data.id,
               title: data.title,
@@ -151,7 +151,8 @@ export class MovieService {
               budget: data.budget,
               homepage: data.homepage,
               original_language: data.original_language,
-              production_companies: data.production_companies
+              production_companies: data.production_companies,
+              tagline: data.tagline
             };
           }
         ));

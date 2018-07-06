@@ -102,7 +102,6 @@ export class TvShowService {
    */
   getLatestTv(page: number): Observable<any> {
     const url = (this.apiUrl + '/tv/airing_today' + '?api_key=' + this.apiKey + '&page=' + page + '&language=en-US');
-    console.log(url, 'URL');
     return this.http
       .get(url)
       .pipe(
@@ -131,7 +130,6 @@ export class TvShowService {
       .pipe(
         map(
           (data: any) => {
-            console.log(data, 'totaldata');
             return {
               id: data.id,
               name: data.name,
