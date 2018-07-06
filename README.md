@@ -1,4 +1,31 @@
-# AlertMovies
+# Alert Movies
+Project for Alert Logic's Angular 6 course
+This project is an implementation of 
+[TMDB](https://developers.themoviedb.org/3/getting-started) api v3 created with Angular 6.
+
+### Features
+- **index page:**
+- **Search bar:**
+- **Full Search:**
+- **List Movies:** 
+- **Movie Details:** 
+- **List Tv Show:** 
+- **Tv Show Details:** 
+- **List People:** 
+- **Person Details:**
+
+- **Deploy:**  [https://juandagr.github.io/alert-movies/](https://juandagr.github.io/alert-movies/)
+
+## External modules
+
+### Teradata Covalent
+The UI of this project was created with [Teradata Covalent](https://github.com/Teradata/covalent) 
+which is based on Angular Material
+
+### Angular Material
+The [Angular-Material](https://github.com/angular/material)
+
+### Angular-cli
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
 
