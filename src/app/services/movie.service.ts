@@ -132,7 +132,6 @@ export class MovieService {
       .pipe(
         map(
           (data: any) => {
-            console.log(data);
             return {
               id: data.id,
               title: data.title,

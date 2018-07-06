@@ -51,8 +51,6 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getMovieDetails(idMovie).subscribe(
         (data: any) => {
           this.movie = data;
-          console.log(data);
-
           if (this.movie.backdrop_path) {
             this.image = this.apiImgBack + this.movie.backdrop_path;
             console.log(this.image);

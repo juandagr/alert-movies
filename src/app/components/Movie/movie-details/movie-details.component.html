@@ -108,6 +108,16 @@
           </div>
         </div>
       </div>
+
+      <mat-divider class="md-divider" *ngIf="movie.homepage" style="margin-top: 20px"></mat-divider>
+
+      <!-- tv show homepage -->
+      <div fxLayout="row" fxLayoutAlign="end center" *ngIf="movie.homepage"  >
+        <mat-icon style="font-size:25px;">home</mat-icon>
+        <div style="margin-left: 7px" fxLayout="column" fxLayoutAlign="end center" >
+          <a href="{{movie.homepage}}" target="_blank">Homepage</a>
+        </div>
+      </div>
     </div>
   </div>
 

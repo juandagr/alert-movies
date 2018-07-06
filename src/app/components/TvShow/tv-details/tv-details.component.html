@@ -41,11 +41,7 @@
             </mat-chip-list>
           </div>
 
-          <div fxLayout="row" fxLayoutAlign="start center" class="single_icon" (click)="openTrailer()" style="border-color: #cccccc; border-width: 1px">
-            <mat-icon style="font-size: 40px; margin-right: 15px" >play_arrow</mat-icon>
-            <span style="margin-top: 15px">Play trailer</span>
-          </div>
-
+          <h3 style="margin: auto; font-size: 30px">{{tvShow.vote_average}}<mat-icon style=" color: gold; font-size: 40px">star_rate</mat-icon></h3>
         </div>
 
         <mat-divider class="md-divider"></mat-divider>
@@ -118,6 +114,16 @@
                 <img class="companie_logo" matTooltip="{{companie.name}}"  src="{{url_images_backdrops}}{{companie.logo_path}}" alt="companie logo">
               </div>
             </div>
+          </div>
+        </div>
+
+        <mat-divider class="md-divider" *ngIf="tvShow.homepage"></mat-divider>
+
+        <!-- tv show homepage -->
+        <div fxLayout="row" fxLayoutAlign="end center" *ngIf="tvShow.homepage"  >
+          <mat-icon style="font-size:25px;">home</mat-icon>
+          <div style="margin-left: 7px" fxLayout="column" fxLayoutAlign="end center" >
+            <a href="{{tvShow.homepage}}" target="_blank">Homepage</a>
           </div>
         </div>
       </div>
