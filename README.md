@@ -4,15 +4,15 @@ This project is an implementation of
 [TMDB](https://developers.themoviedb.org/3/getting-started) api v3 created with Angular 6.
 
 ### Features
-- **index page:**
-- **Search bar:**
-- **Full Search:**
-- **List Movies:** 
-- **Movie Details:** 
-- **List Tv Show:** 
-- **Tv Show Details:** 
-- **List People:** 
-- **Person Details:**
+- **index page**
+- **Search bar**
+- **Full Search**
+- **List Movies** 
+- **Movie Details** 
+- **List Tv Show** 
+- **Tv Show Details** 
+- **List People** 
+- **Person Details**
 
 - **Deploy:**  [https://juandagr.github.io/alert-movies/](https://juandagr.github.io/alert-movies/)
 
