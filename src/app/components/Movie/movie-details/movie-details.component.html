@@ -237,7 +237,7 @@
   </mat-tab>
 
   <!--  Tab to show the movies similar to this-->
-  <mat-tab label="Similar" *ngIf="movie.similar.results > 0">
+  <mat-tab label="Similar">
       <mat-grid-list  [cols]="breakpointPosters" (window:resize)="onResize($event)" gutterSize="5px" rowHeight="3:4">
         <mat-grid-tile *ngFor="let movieSimilar of movie.similar.results" [colspan]="1" [rowspan]="1">
           <div class="container">
