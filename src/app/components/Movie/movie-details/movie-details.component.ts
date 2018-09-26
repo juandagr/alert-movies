@@ -43,7 +43,6 @@ export class MovieDetailsComponent implements OnInit {
     this.breakpointPosters = (window.innerHeight <= 400) ? 1 : 4;
     this.breakpointPeople = (window.innerHeight <= 400) ? 1 : 5;
     this.getMovieDetails();
-
   }
 
   getMovieDetails() {
@@ -52,7 +51,6 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getMovieDetails(idMovie).subscribe(
         (data: any) => {
           this.movie = data;
-          console.log(JSON.stringify(this.movie));
           if (this.movie.backdrop_path) {
             this.image = this.apiImgBack + this.movie.backdrop_path;
           } else {
