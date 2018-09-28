@@ -1,5 +1,5 @@
 import {MovieDetailsComponent} from './movie-details.component';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {Observable, of} from 'rxjs';
 import {movie_details} from '../../../testing/movie-detail';
 import {AppComponent} from '../../../app.component';
@@ -29,14 +29,14 @@ import {
   MatChipsModule, MatDialog, MatDialogModule, MatDividerModule, MatGridListModule,
   MatIconModule,
   MatListModule,
-  MatSidenavModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+  MatSidenavModule, MatTabChangeEvent, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {AppRoutingModule} from '../../../app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CovalentLayoutModule, CovalentPagingModule, CovalentSearchModule, CovalentStepsModule} from '@covalent/core';
 import {MovieService} from '../../../services/movie.service';
 import {ActivatedRoute} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
+import {By, DomSanitizer} from '@angular/platform-browser';
 import {before} from 'selenium-webdriver/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -44,10 +44,14 @@ import {RouterTestingModule} from '@angular/router/testing';
 describe('MovieDetails component test', () => {
   let component: MovieDetailsComponent;
   let fixture: ComponentFixture<MovieDetailsComponent>;
+  let movieServiceSpy: MovieServiceSpy;
 
   // spy creation
 
   // movie service
+  class MovieServiceSpy {
+    getMovieDetails = getMovieDetailsSpy;
+  }
   const getMovieDetailsSpy = jasmine.createSpy('getMovieDetails').and.returnValue(of(movie_details));
 
   // router
@@ -106,9 +110,7 @@ describe('MovieDetails component test', () => {
       ],
       providers: [
         {
-          provide: MovieService, useClass: class {
-            getMovieDetails = getMovieDetailsSpy;
-          }
+          provide: MovieService, useClass: MovieServiceSpy
         },
         {
           provide: ActivatedRoute, useValue: {
@@ -116,8 +118,10 @@ describe('MovieDetails component test', () => {
           }
         },
         {
-          provide: DomSanitizer, useClass: class {
-            bypassSecurityTrustResourceUrl = bypassSecurityTrustResourceUrlSpy;
+          provide: DomSanitizer, useValue: {
+            sanitize: () => 'safeString',
+            bypassSecurityTrustHtml: () => 'safeString',
+            bypassSecurityTrustResourceUrl: () => 'safeString'
           }
         },
         {
@@ -130,9 +134,108 @@ describe('MovieDetails component test', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MovieDetailsComponent);
     component = fixture.componentInstance;
+    movieServiceSpy = TestBed.get(MovieService);
   });
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('WHEN component is created', () => {
+    it('SHOULD create the component variables ', function () {
+      expect(component).toBeTruthy();
+      expect(component.movie).toBeUndefined();
+      expect(component.id).toBeUndefined();
+      expect(component.trustedDashboardUrl).toBeUndefined();
+      expect(component.videoURL).toBeUndefined();
+      expect(component.tabIndex).toBe(0);
+      expect(component.position).toBe('right');
+      expect(component.url_image_poster).toBe('https://image.tmdb.org/t/p/w500');
+      expect(component.url_images_backdrops).toBe('https://image.tmdb.org/t/p/original');
+      expect(component.url_image_profile).toBe('https://image.tmdb.org/t/p/w500');
+      expect(component.apiImgBack).toBe('https://image.tmdb.org/t/p/' + 'w1400_and_h450_bestv2');
+      expect(component.image).toBeUndefined();
+      expect(component.breakpointBackdrops).toBeUndefined();
+      expect(component.breakpointPeople).toBeUndefined();
+      expect(component.breakpointPosters).toBeUndefined();
+    });
+  });
+
+  describe('WHEN ngOnInit function is called', () => {
+    beforeEach( () => {
+      spyOn(component, 'getMovieDetails').calls.reset();
+    });
+
+    it('SHOULD set values on variables', function () {
+      component.ngOnInit();
+      expect(component.breakpointBackdrops).toBe(3);
+      expect(component.breakpointPosters).toBe(4);
+      expect(component.breakpointPeople).toBe(5);
+    });
+    it('SHOULD call getMovieDetails function', fakeAsync(function () {
+      component.ngOnInit();
+      tick();
+      expect(component.getMovieDetails).toHaveBeenCalledTimes(1);
+    }));
+  });
+
+  describe('WHEN getMovieDetails function is called', () => {
+    beforeEach(() => {
+      movieServiceSpy.getMovieDetails.calls.reset();
+    });
+    it('SHOULD call functions', function () {
+      component.getMovieDetails();
+      expect(movieServiceSpy.getMovieDetails).toHaveBeenCalledTimes(1);
+    });
+    it('SHOULD set values on variables', function () {
+      component.getMovieDetails();
+      expect(component.movie).toBe(movie_details);
+      expect(component.image).toBe(component.apiImgBack + '/f4E0ocYeToEuXvczZv6QArrMDJ.jpg');
+      expect(component.videoURL).toBe('https://www.youtube.com/embed/' + 'WaG1KZqrLvM' + '?autoplay=1');
+      expect(component.trustedDashboardUrl).toBe('safeString');
+    });
+  });
+
+  describe('WHEN onResize function is called', () => {
+    let event;
+    beforeEach(() => {
+      event = {'target': {'innerWidth': 400}};
+    });
+    it('SHOULD set values on variables', function () {
+      component.breakpointBackdrops =  3;
+      component.breakpointPosters =  4;
+      component.breakpointPeople =  5;
+      component.onResize({'target': {'innerWidth': 400}});
+      expect(component.breakpointBackdrops).toBe(1);
+      expect(component.breakpointPosters).toBe(1);
+      expect(component.breakpointPeople).toBe(2);
+    });
+  });
+
+  describe('WHEN the user change the tab', () => {
+    let tab;
+
+    it('SHOULD change the index', fakeAsync(function () {
+      fixture.detectChanges();
+      tab = fixture.debugElement.queryAll(By.css('.mat-tab-label'))[1].nativeElement;
+      tab.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+      tick();
+      expect(component.tabIndex).toBe(1);
+    }));
+  });
+
+  describe('WHEN convertTime function is called', () => {
+    let minutes: number;
+
+    it('SHOULD return time in h:min format', function () {
+      minutes = 150;
+      console.log(component.convertTime(undefined));
+      expect(component.convertTime(minutes)).toBe('2h 30min');
+    });
+    it('SHOULD return "" if the param is undefined', function () {
+      minutes = undefined;
+      expect(component.convertTime(minutes)).toBe('');
+    });
   });
 });

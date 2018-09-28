@@ -62,6 +62,7 @@ export class MovieDetailsComponent implements OnInit {
               if (this.movie.videos.results[i].type === 'Trailer') {
                 this.videoURL = 'https://www.youtube.com/embed/' + this.movie.videos.results[i].key + '?autoplay=1';
                 this.trustedDashboardUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoURL);
+                console.log(this.trustedDashboardUrl);
                 break;
               }
             }
@@ -113,11 +114,7 @@ export class MovieDetailsComponent implements OnInit {
     } else if ((event.target.innerWidth <= 1400) && (event.target.innerWidth > 1200)) {
       this.breakpointPeople = 5;
     }
-  }
 
-  // Function to change the tab
-  changeTab() {
-    this.tabIndex = 0;
   }
 
   /**
