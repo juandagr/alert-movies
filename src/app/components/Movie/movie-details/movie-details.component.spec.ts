@@ -1,6 +1,6 @@
 import {MovieDetailsComponent} from './movie-details.component';
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {Observable, of} from 'rxjs';
+import {of} from 'rxjs';
 import {movie_details} from '../../../testing/movie-detail';
 import {AppComponent} from '../../../app.component';
 import {MovieListComponent} from '../movie-list/movie-list.component';
@@ -37,7 +37,6 @@ import {CovalentLayoutModule, CovalentPagingModule, CovalentSearchModule, Covale
 import {MovieService} from '../../../services/movie.service';
 import {ActivatedRoute} from '@angular/router';
 import {By, DomSanitizer} from '@angular/platform-browser';
-import {before} from 'selenium-webdriver/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
@@ -230,12 +229,34 @@ describe('MovieDetails component test', () => {
 
     it('SHOULD return time in h:min format', function () {
       minutes = 150;
-      console.log(component.convertTime(undefined));
       expect(component.convertTime(minutes)).toBe('2h 30min');
     });
     it('SHOULD return "" if the param is undefined', function () {
       minutes = undefined;
       expect(component.convertTime(minutes)).toBe('');
+    });
+  });
+
+  describe('WHEN navigate to existing movie', () => {
+    it('SHOULD display the movie general details',function () {
+      fixture.detectChanges();
+      const title = fixture.debugElement.query(By.css('.movieTitle')).nativeElement;
+      const tagLine = fixture.debugElement.query(By.css('h4')).nativeElement;
+      const average = fixture.debugElement.query(By.css('#averagee')).nativeElement;
+      const runtime = fixture.debugElement.query(By.css('#runtime')).nativeElement;
+      const revenue = fixture.debugElement.query(By.css('#revenue')).nativeElement;
+      const budget = fixture.debugElement.query(By.css('#budget')).nativeElement;
+      const genres = fixture.debugElement.queryAll(By.css('.chip-genre'));
+
+      expect(title.textContent).toBe(movie_details.title);
+      expect(tagLine.textContent).toBe(movie_details.tagline);
+      expect(average.textContent).toBe(movie_details.vote_average + 'star_rate');
+      expect(runtime.textContent).toContain(component.convertTime(movie_details.runtime));
+      expect(revenue.textContent).toContain(movie_details.revenue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+      expect(budget.textContent).toContain(movie_details.budget.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+      for (let i = 0; i < genres.length; i++) {
+        expect(genres[i].nativeElement.textContent).toContain(movie_details.genres[i].name);
+      }
     });
   });
 });

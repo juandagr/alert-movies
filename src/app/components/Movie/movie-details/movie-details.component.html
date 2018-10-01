@@ -39,13 +39,13 @@
           </span>
 
             <mat-chip-list *ngIf="movie.genres" >
-              <mat-chip color="whitesmoke" *ngFor="let genre of movie.genres" style="font-size: 12px; height: 20px; width: auto; margin-bottom: 15px">
+              <mat-chip class="chip-genre" color="whitesmoke" *ngFor="let genre of movie.genres" style="font-size: 12px; height: 20px; width: auto; margin-bottom: 15px">
                 {{genre.name}}
               </mat-chip>
             </mat-chip-list>
           </div>
 
-          <h3 style="margin: auto; font-size: 30px">{{movie.vote_average}}<mat-icon style=" color: gold; font-size: 40px">star_rate</mat-icon></h3>
+          <h3 id='averagee' style="margin: auto; font-size: 30px">{{movie.vote_average}}<mat-icon style=" color: gold; font-size: 40px">star_rate</mat-icon></h3>
 
           <div fxLayout="row" fxLayoutAlign="start center" class="single_icon" (click)="openTrailer()" style="border-color: #cccccc; border-width: 1px">
             <mat-icon style="font-size: 40px; margin-right: 15px" >play_arrow</mat-icon>
@@ -72,7 +72,7 @@
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>access_time</mat-icon>
               <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
-                <p>Runtime<br/><b>{{convertTime(movie.runtime)}}</b></p>
+                <p id='runtime' >Runtime<br/><b>{{convertTime(movie.runtime)}}</b></p>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>attach_money</mat-icon>
               <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
-                <p>Revenue<br/><b>{{movie.revenue| currency}}</b></p>
+                <p id="revenue" >Revenue<br/><b>{{movie.revenue| currency}}</b></p>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <mat-icon>money_off</mat-icon>
               <div style="margin-left: 5px" fxLayout="column" fxLayoutAlign="start center" >
-                <p>Budget<br/><b>{{movie.budget| currency}}</b></p>
+                <p id="budget" >Budget<br/><b>{{movie.budget| currency}}</b></p>
               </div>
             </div>
           </div>

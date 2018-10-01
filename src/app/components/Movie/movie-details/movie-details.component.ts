@@ -62,7 +62,6 @@ export class MovieDetailsComponent implements OnInit {
               if (this.movie.videos.results[i].type === 'Trailer') {
                 this.videoURL = 'https://www.youtube.com/embed/' + this.movie.videos.results[i].key + '?autoplay=1';
                 this.trustedDashboardUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoURL);
-                console.log(this.trustedDashboardUrl);
                 break;
               }
             }
@@ -134,6 +133,11 @@ export class MovieDetailsComponent implements OnInit {
       }
     }
     return result;
+  }
+
+  // Function to change the tab to the index tab
+  changeTab() {
+    this.tabIndex = 0;
   }
 
   // Function to open and play the trailer
