@@ -4401,3 +4401,186 @@ export const movie_details = {
   ],
   "tagline": "The Hunt Has Evolved"
 };
+
+export const movies = [
+  {
+    "id":348350,
+    "title":"Solo: A Star Wars Story",
+    "vote_average":6.7,
+    "poster_path":"/3IGbjc5ZC5yxim5W0sFING2kdcz.jpg",
+    "overview":"Through a series of daring escapades deep within a dark and dangerous criminal underworld, Han Solo meets his mighty future copilot Chewbacca and encounters the notorious gambler Lando Calrissian.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":439079,
+    "title":"The Nun",
+    "vote_average":5.9,
+    "poster_path":"/sFC1ElvoKGdHJIWRpNB3xWJ9lJA.jpg",
+    "overview":"When a young nun at a cloistered abbey in Romania takes her own life, a priest with a haunted past and a novitiate on the threshold of her final vows are sent by the Vatican to investigate. Together they uncover the order’s unholy secret. Risking not only their lives but their faith and their very souls, they confront a malevolent force in the form of the same demonic nun that first terrorized audiences in “The Conjuring 2,” as the abbey becomes a horrific battleground between the living and the damned.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":135870,
+    "title":"Rebel",
+    "vote_average":3.9,
+    "poster_path":"/dNTzorrVmcJ25fUGzs9FfkoXb0P.jpg",
+    "overview":"Rebel is a romantic action revenge drama, which revolves around the story of a happy-go-lucky guy. The hero (Prabhas) is the son of a good-natured mafia don (Krishnam Raju). The hero becomes Rebel after his father is killed. How he takes revenge upon the people, who killed his father, will form the second half of the movie. Apart from directing, Raghava Lawrence also handles the choreography, screenplay and music direction for the film. The film is being produced by J. Bhaghawan and J. Pulla Rao under Sri Balaji Cine Media banner.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":299536,
+    "title":"Avengers: Infinity War",
+    "vote_average":8.3,
+    "poster_path":"/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+    "overview":"As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":351286,
+    "title":"Jurassic World: Fallen Kingdom",
+    "vote_average":6.5,
+    "poster_path":"/c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg",
+    "overview":"Three years after the demise of Jurassic World, a volcanic eruption threatens the remaining dinosaurs on the isla Nublar, so Claire Dearing, the former park manager, recruits Owen Grady to help prevent the extinction of the dinosaurs once again.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":346910,
+    "title":"The Predator",
+    "vote_average":5.4,
+    "poster_path":"/wMq9kQXTeQCHUZOG4fAe5cAxyUA.jpg",
+    "overview":"From the outer reaches of space to the small-town streets of suburbia, the hunt comes home. Now, the universe’s most lethal hunters are stronger, smarter and deadlier than ever before, having genetically upgraded themselves with DNA from other species. When a young boy accidentally triggers their return to Earth, only a ragtag crew of ex-soldiers and a disgruntled science teacher can prevent the end of the human race.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":400155,
+    "title":"Hotel Transylvania 3: Summer Vacation",
+    "vote_average":6.9,
+    "poster_path":"/gjAFM4xhA5vyLxxKMz38ujlUfDL.jpg",
+    "overview":"Dracula, Mavis, Johnny and the rest of the Drac Pack take a vacation on a luxury Monster Cruise Ship, where Dracula falls in love with the ship’s captain, Ericka, who’s secretly a descendant of Abraham Van Helsing, the notorious monster slayer.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":505039,
+    "title":"Illicit Desires",
+    "vote_average":4.5,
+    "poster_path":"/mndCeIXbFH4pTtjaVUzf3eEOPZp.jpg",
+    "overview":"\"Illicit Desires\" peeks behind the curtain into the world of an adult toy manufacturer (played by Valerie Baber). And what a world it is! Greed and betrayal run wild in the corporate world of sensual oddities as a new, young, office intern (the legendary August Ames) sets her sights on moving right to the top. What she's willing to do to get where she wants to be will absolutely kill you. It also helps if you're a psychopathic murderess.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":447200,
+    "title":"Skyscraper",
+    "vote_average":6.1,
+    "poster_path":"/5LYSsOPzuP13201qSzMjNxi8FxN.jpg",
+    "overview":"Framed and on the run, a former FBI agent must save his family from a blazing fire in the world's tallest building.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":335983,
+    "title":"Venom",
+    "vote_average":6,
+    "poster_path":"/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg",
+    "overview":"When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego “Venom” to save his life.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":465518,
+    "title":"Demon Covered in Scars",
+    "vote_average":8,
+    "poster_path":"/w2gQDZnte8q4jscMpsiY755nv5T.jpg",
+    "overview":"Mai (Rika Adachi) is a high school student. She attends a new school and there she meets her classmate Shino (Manami Enosawa). Shino was bullied by Mai's friends back in their middle school days. Table have now turned.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":507569,
+    "title":"The Seven Deadly Sins: Prisoners of the Sky",
+    "vote_average":5.8,
+    "poster_path":"/r6pPUVUKU5eIpYj4oEzidk5ZibB.jpg",
+    "overview":"Traveling in search of the rare ingredient, “sky fish”  Meliodas and Hawk arrive at a palace that floats above the clouds. The people there are busy preparing a ceremony, meant to protect their home from a ferocious beast that awakens once every 3,000 years. But before the ritual is complete, the Six Knights of Black—a Demon Clan army—removes the seal on the beast, threatening the lives of everyone in the Sky Palace.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":383498,
+    "title":"Deadpool 2",
+    "vote_average":7.5,
+    "poster_path":"/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg",
+    "overview":"Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":284054,
+    "title":"Black Panther",
+    "vote_average":7.4,
+    "poster_path":"/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",
+    "overview":"King T'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new leader. However, T'Challa soon finds that he is challenged for the throne by factions within his own country as well as without. Using powers reserved to Wakandan kings, T'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister, members of the Dora Milaje (the Wakandan 'special forces') and an American secret agent, to prevent Wakanda from being dragged into a world war.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":442249,
+    "title":"The First Purge",
+    "vote_average":5.8,
+    "poster_path":"/eN1954A4fnAjQlDMJLh0dsTczFK.jpg",
+    "overview":"To push the crime rate below one percent for the rest of the year, the New Founding Fathers of America test a sociological theory that vents aggression for one night in one isolated community. But when the violence of oppressors meets the rage of the others, the contagion will explode from the trial-city borders and spread across the nation.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":345940,
+    "title":"The Meg",
+    "vote_average":6,
+    "poster_path":"/eyWICPcxOuTcDDDbTMOZawoOn8d.jpg",
+    "overview":"A deep sea submersible pilot revisits his past fears in the Mariana Trench, and accidentally unleashes the seventy foot ancestor of the Great White Shark believed to be extinct.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":353081,
+    "title":"Mission: Impossible - Fallout",
+    "vote_average":7.3,
+    "poster_path":"/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg",
+    "overview":"When an IMF mission ends badly, the world is faced with dire consequences. As Ethan Hunt takes it upon himself to fulfill his original briefing, the CIA begin to question his loyalty and his motives. The IMF team find themselves in a race against time, hunted by assassins while trying to prevent a global catastrophe.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":400535,
+    "title":"Sicario: Day of the Soldado",
+    "vote_average":6.7,
+    "poster_path":"/msqWSQkU403cQKjQHnWLnugv7EY.jpg",
+    "overview":"Agent Matt Graver teams up with operative Alejandro Gillick to prevent Mexican drug cartels from smuggling terrorists across the United States border.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":395841,
+    "title":"Hold the Dark",
+    "vote_average":5.8,
+    "poster_path":"/1etEySwZQnBJpzgplgadPi5y4PL.jpg",
+    "overview":"In the grim Alaskan winter, a naturalist hunts for wolves blamed for killing a local boy, but he soon finds himself swept into a chilling mystery.",
+    "total_pages":993,
+    "total_results":19847
+  },
+  {
+    "id":402900,
+    "title":"Ocean's Eight",
+    "vote_average":6.9,
+    "poster_path":"/MvYpKlpFukTivnlBhizGbkAe3v.jpg",
+    "overview":"Debbie Ocean, a criminal mastermind, gathers a crew of female thieves to pull off the heist of the century at New York’s annual Met Gala.",
+    "total_pages":993,
+    "total_results":19847
+  }
+];

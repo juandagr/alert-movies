@@ -27,11 +27,17 @@ export class MovieListComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     public router: Router,
-    private route: ActivatedRoute) { }
+    public route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.currentPage = +this.route.snapshot.paramMap.get('page');
-    this.getMoviesActualPage();
+    this.route.params.subscribe(params => {
+      if (params['page']) {
+        this.currentPage = params['page'];
+      } else {
+        this.currentPage = 1;
+      }
+      this.getMoviesActualPage();
+    });
     this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
   }
 
@@ -75,17 +81,5 @@ export class MovieListComponent implements OnInit {
       this.breakpoint = 4;
     }
   }
-
-  /**
-   * manages the pagination
-   * @param event: Event of change the page
-   */
-  changeLinks(event: IPageChangeEvent): void {
-    this.eventLinks = event;
-    this.page = this.eventLinks.page;
-    this.router.navigate(['/list-movies/popular', this.page]);
-    this.getMoviesActualPage();
-  }
-
 }
 
