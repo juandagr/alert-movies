@@ -30,8 +30,14 @@ export class MovieListNowPlayingComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.currentPage = +this.route.snapshot.paramMap.get('page');
-    this.getMoviesActualPage();
+    this.route.params.subscribe(params => {
+      if (params['page']) {
+        this.currentPage = params['page'];
+      } else {
+        this.currentPage = 1;
+      }
+      this.getMoviesActualPage();
+    });
     this.breakpoint = (window.innerHeight <= 400) ? 1 : 4;
   }
 

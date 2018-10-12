@@ -31,8 +31,10 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      if (params['page']) {
-        this.currentPage = params['page'];
+      let page: number;
+      page = params['page'];
+      if (page) {
+        this.currentPage = page;
       } else {
         this.currentPage = 1;
       }
@@ -61,7 +63,8 @@ export class MovieListComponent implements OnInit {
         this.totalPages = this.movies[0].total_pages;
       },
       (error: any) => {
-        console.log(error);
+        this.currentPage = 1;
+        this.router.navigate(['/list-movies/popular', this.currentPage]);
       }
     );
   }

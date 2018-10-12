@@ -1,6 +1,6 @@
 
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {of} from 'rxjs';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {of, throwError} from 'rxjs';
 import {movies} from '../../../testing/movie-service-mock';
 import {AppComponent} from '../../../app.component';
 import {MovieListComponent} from '../movie-list/movie-list.component';
@@ -18,7 +18,7 @@ import {TvListTopRatedComponent} from '../../TvShow/tv-list-top-rated/tv-list-to
 import {TvListLatestComponent} from '../../TvShow/tv-list-latest/tv-list-latest.component';
 import {IndexComponent} from '../../index/index.component';
 import {CommonModule} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -36,18 +36,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CovalentLayoutModule, CovalentPagingModule, CovalentSearchModule, CovalentStepsModule} from '@covalent/core';
 import {MovieService} from '../../../services/movie.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MovieDetailsComponent} from '../movie-details/movie-details.component';
-import SpyObj = jasmine.SpyObj;
-import {by} from 'protractor';
 import {By} from '@angular/platform-browser';
 
-describe('MovieDetails component test', () => {
+describe('MovieList component test', () => {
   let component: MovieListComponent;
   let fixture: ComponentFixture<MovieListComponent>;
   let movieServiceSpy: MovieServiceSpy;
-
+  let httpClientSpy: { get: jasmine.Spy };
+  let api_service: MovieService;
   // spy creation
 
   // movie service
@@ -131,6 +130,8 @@ describe('MovieDetails component test', () => {
     fixture = TestBed.createComponent(MovieListComponent);
     component = fixture.componentInstance;
     movieServiceSpy = TestBed.get(MovieService);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    api_service = new MovieService(<any>httpClientSpy);
   });
 
   describe('WHEN component is created', () => {
@@ -193,17 +194,28 @@ describe('MovieDetails component test', () => {
       expect(component.totalPages).toBe(993);
       expect(component.totalResults).toBe(19847);
     });
+    it('SHOULD navigate to movie list with currente page = 1', function () {
+      movieServiceSpy.getPopularMovies = jasmine.createSpy('getPopularMovies').and.returnValue(throwError('ERROR'));
+      component.getMoviesActualPage();
+      expect(component.currentPage).toBe(1);
+      expect(navigateSpy).toHaveBeenCalledWith(['/list-movies/popular', 1]);
+    });
   });
 
   describe('WHEN onResize function is called', () => {
-    let event;
-    beforeEach(() => {
-      event = {'target': {'innerWidth': 400}};
-    });
     it('SHOULD set values on variables', function () {
       component.breakpoint =  4;
       component.onResize({'target': {'innerWidth': 400}});
       expect(component.breakpoint).toBe(1);
+
+      component.onResize({'target': {'innerWidth': 600}});
+      expect(component.breakpoint).toBe(2);
+
+      component.onResize({'target': {'innerWidth': 1000}});
+      expect(component.breakpoint).toBe(3);
+
+      component.onResize({'target': {'innerWidth': 1300}});
+      expect(component.breakpoint).toBe(4);
     });
   });
 
@@ -237,4 +249,119 @@ describe('MovieDetails component test', () => {
       expect(movies.length).toEqual(20);
     });
   });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+describe('MovieList component test', () => {
+  let component: MovieListComponent;
+  let fixture: ComponentFixture<MovieListComponent>;
+  let movieServiceSpy: MovieServiceSpy;
+
+  // spy creation
+
+  // movie service
+  class MovieServiceSpy {
+    getPopularMovies = getPopularMoviesSpy;
+  }
+  const getPopularMoviesSpy = jasmine.createSpy('getPopularMovies').and.returnValue(throwError('ERROR'));
+
+  // router
+  const navigateSpy = jasmine.createSpy('navigate');
+  const params = {page: 4};
+
+
+  beforeEach(async (() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+        MovieListComponent,
+        MovieDetailsComponent,
+        MovieListTopRatedComponent,
+        ListPopularPeopleComponent,
+        TrailerComponent,
+        PersonDetailComponent,
+        MovieListUpcomingComponent,
+        MovieListNowPlayingComponent,
+        SearchComponent,
+        TvListPopularComponent,
+        TvDetailsComponent,
+        TvListOnAirComponent,
+        TvListTopRatedComponent,
+        TvListLatestComponent,
+        IndexComponent,
+      ],
+      imports: [
+        CommonModule,
+        HttpClientModule,
+        HttpModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatButtonModule, MatCheckboxModule,
+        MatCardModule,
+        MatChipsModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatGridListModule,
+        AppRoutingModule,
+        MatGridListModule,
+        MatTabsModule,
+        MatDividerModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatToolbarModule,
+        NgbModule.forRoot(),
+        CovalentLayoutModule,
+        CovalentStepsModule,
+        CovalentPagingModule,
+        CovalentSearchModule,
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
+      providers: [
+        {
+          provide: MovieService, useClass: MovieServiceSpy
+        },
+        {
+          provide: ActivatedRoute, useValue: {
+            params: of(params)
+          }
+        },
+        {
+          provide: Router, useClass: class {
+            navigate = navigateSpy;
+          }
+        }
+      ]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MovieListComponent);
+    component = fixture.componentInstance;
+    movieServiceSpy = TestBed.get(MovieService);
+  });
+
+  describe('WHEN getMoviesActualPage function si called', function () {
+    beforeEach( () => {
+      getPopularMoviesSpy.calls.reset();
+    });
+    it('SHOULD navigate to movie list with currente page = 1', function () {
+      component.getMoviesActualPage();
+      expect(component.currentPage).toBe(1);
+      expect(navigateSpy).toHaveBeenCalledWith(['/list-movies/popular', 1]);
+    });
+
+  });
+
 });
