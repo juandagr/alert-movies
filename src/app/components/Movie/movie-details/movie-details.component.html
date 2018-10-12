@@ -265,7 +265,7 @@
                     <h3 style="margin: auto">{{movieSimilar.vote_average}}<mat-icon style=" color: gold">star_rate</mat-icon></h3>
                   </div>
                   <p><b>{{ (movieSimilar.overview.length > 150) ? (movieSimilar.overview | slice:0:150) + '....' : (movieSimilar.overview) }}</b></p>
-                  <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', movieSimilar.id]" (click)="changeTab()"> Details </button>
+                  <button style="color: darkred; background-color: whitesmoke" mat-button color="red" [routerLink]="['/movie', movieSimilar.id]" (click)="resetTab()"> Details </button>
                 </div>
 
 

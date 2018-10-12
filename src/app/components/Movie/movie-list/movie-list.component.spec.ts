@@ -194,7 +194,7 @@ describe('MovieList component test', () => {
       expect(component.totalPages).toBe(993);
       expect(component.totalResults).toBe(19847);
     });
-    it('SHOULD navigate to movie list with currente page = 1', function () {
+    it('SHOULD navigate to movie list with current page = 1 when navigate on a nonexistent page', function () {
       movieServiceSpy.getPopularMovies = jasmine.createSpy('getPopularMovies').and.returnValue(throwError('ERROR'));
       component.getMoviesActualPage();
       expect(component.currentPage).toBe(1);
@@ -245,123 +245,8 @@ describe('MovieList component test', () => {
     });
     it('SHOULD display 20 movies', function () {
       fixture.detectChanges();
-      const movies = fixture.debugElement.queryAll(By.css('.mat-figure'));
-      expect(movies.length).toEqual(20);
+      const moviess = fixture.debugElement.queryAll(By.css('.mat-figure'));
+      expect(moviess.length).toEqual(20);
     });
   });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-describe('MovieList component test', () => {
-  let component: MovieListComponent;
-  let fixture: ComponentFixture<MovieListComponent>;
-  let movieServiceSpy: MovieServiceSpy;
-
-  // spy creation
-
-  // movie service
-  class MovieServiceSpy {
-    getPopularMovies = getPopularMoviesSpy;
-  }
-  const getPopularMoviesSpy = jasmine.createSpy('getPopularMovies').and.returnValue(throwError('ERROR'));
-
-  // router
-  const navigateSpy = jasmine.createSpy('navigate');
-  const params = {page: 4};
-
-
-  beforeEach(async (() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        MovieListComponent,
-        MovieDetailsComponent,
-        MovieListTopRatedComponent,
-        ListPopularPeopleComponent,
-        TrailerComponent,
-        PersonDetailComponent,
-        MovieListUpcomingComponent,
-        MovieListNowPlayingComponent,
-        SearchComponent,
-        TvListPopularComponent,
-        TvDetailsComponent,
-        TvListOnAirComponent,
-        TvListTopRatedComponent,
-        TvListLatestComponent,
-        IndexComponent,
-      ],
-      imports: [
-        CommonModule,
-        HttpClientModule,
-        HttpModule,
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MatButtonModule, MatCheckboxModule,
-        MatCardModule,
-        MatChipsModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatListModule,
-        MatGridListModule,
-        AppRoutingModule,
-        MatGridListModule,
-        MatTabsModule,
-        MatDividerModule,
-        MatDialogModule,
-        MatTooltipModule,
-        MatToolbarModule,
-        NgbModule.forRoot(),
-        CovalentLayoutModule,
-        CovalentStepsModule,
-        CovalentPagingModule,
-        CovalentSearchModule,
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
-      providers: [
-        {
-          provide: MovieService, useClass: MovieServiceSpy
-        },
-        {
-          provide: ActivatedRoute, useValue: {
-            params: of(params)
-          }
-        },
-        {
-          provide: Router, useClass: class {
-            navigate = navigateSpy;
-          }
-        }
-      ]
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MovieListComponent);
-    component = fixture.componentInstance;
-    movieServiceSpy = TestBed.get(MovieService);
-  });
-
-  describe('WHEN getMoviesActualPage function si called', function () {
-    beforeEach( () => {
-      getPopularMoviesSpy.calls.reset();
-    });
-    it('SHOULD navigate to movie list with currente page = 1', function () {
-      component.getMoviesActualPage();
-      expect(component.currentPage).toBe(1);
-      expect(navigateSpy).toHaveBeenCalledWith(['/list-movies/popular', 1]);
-    });
-
-  });
-
 });

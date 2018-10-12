@@ -136,7 +136,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   // Function to change the tab to the index tab
-  changeTab() {
+  resetTab() {
     this.tabIndex = 0;
   }
 

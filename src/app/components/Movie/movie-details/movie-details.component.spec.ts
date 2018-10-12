@@ -40,7 +40,7 @@ import {By, DomSanitizer} from '@angular/platform-browser';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
-xdescribe('MovieDetails component test', () => {
+describe('MovieDetails component test', () => {
   let component: MovieDetailsComponent;
   let fixture: ComponentFixture<MovieDetailsComponent>;
   let movieServiceSpy: MovieServiceSpy;
@@ -58,6 +58,12 @@ xdescribe('MovieDetails component test', () => {
 
   // sanitizer
   const bypassSecurityTrustResourceUrlSpy = jasmine.createSpy('bypassSecurityTrustResourceUrl');
+
+  // MatDialog
+  class MatDialogSpy {
+    open = openSpy;
+  }
+  const openSpy = jasmine.createSpy('open');
 
   beforeEach(async (() => {
     TestBed.configureTestingModule({
@@ -124,7 +130,7 @@ xdescribe('MovieDetails component test', () => {
           }
         },
         {
-          provide: MatDialog, useValue: {}
+          provide: MatDialog, useClass: MatDialogSpy
         }
       ]
     }).compileComponents();
@@ -189,21 +195,59 @@ xdescribe('MovieDetails component test', () => {
       expect(component.videoURL).toBe('https://www.youtube.com/embed/' + 'WaG1KZqrLvM' + '?autoplay=1');
       expect(component.trustedDashboardUrl).toBe('safeString');
     });
+    it('SHOULD set default backdrop when the movie do not have backdrop', function () {
+      movieServiceSpy.getMovieDetails = jasmine.createSpy('getMovieDetails').and.returnValue(of({ }));
+      component.getMovieDetails();
+      expect(component.image).toBe('assets/background.jpg');
+    });
   });
 
   describe('WHEN onResize function is called', () => {
-    let event;
-    beforeEach(() => {
-      event = {'target': {'innerWidth': 400}};
-    });
     it('SHOULD set values on variables', function () {
       component.breakpointBackdrops =  3;
       component.breakpointPosters =  4;
       component.breakpointPeople =  5;
-      component.onResize({'target': {'innerWidth': 400}});
+
+      component.onResize({'target': {'innerWidth': 350}});
       expect(component.breakpointBackdrops).toBe(1);
       expect(component.breakpointPosters).toBe(1);
+      expect(component.breakpointPeople).toBe(1);
+
+      component.onResize({'target': {'innerWidth': 700}});
+      expect(component.breakpointBackdrops).toBe(2);
+      expect(component.breakpointPosters).toBe(2);
+      expect(component.breakpointPeople).toBe(3);
+
+      component.onResize({'target': {'innerWidth': 900}});
+      expect(component.breakpointBackdrops).toBe(2);
+      expect(component.breakpointPeople).toBe(4);
+
+      component.onResize({'target': {'innerWidth': 1300}});
+      expect(component.breakpointBackdrops).toBe(3);
+      expect(component.breakpointPosters).toBe(4);
+      expect(component.breakpointPeople).toBe(5);
+
+      component.onResize({'target': {'innerWidth': 1900}});
+      expect(component.breakpointBackdrops).toBe(3);
+
+      component.onResize({'target': {'innerWidth': 400}});
       expect(component.breakpointPeople).toBe(2);
+    });
+  });
+
+  describe('WHEN resetTab function is called', () => {
+    it('SHOULD set values on variables', function () {
+      component.tabIndex = 2;
+      expect(component.tabIndex).toBe(2);
+      component.resetTab();
+      expect(component.tabIndex).toBe(0);
+    });
+  });
+
+  describe('WHEN openTrailer function is called', () => {
+    it('SHOULD open a material dialog', function () {
+      component.openTrailer();
+      expect(component.dialog.open).toHaveBeenCalledTimes(1);
     });
   });
 
